@@ -2,7 +2,7 @@
 - Project name: constructy test
 - Unity version: Unity 6000.0.22f1
 - Active game object:
-  - Name: Spatial Panel Manipulator UI Examples
+  - Name: XR Origin Hands (XR Rig)
   - Tag: Untagged
-  - Layer: Default
+  - Layer: Ignore Raycast
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

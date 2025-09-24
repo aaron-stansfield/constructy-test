@@ -5,14 +5,16 @@ TagManager:
   serializedVersion: 3
   tags:
   - Anchor
+  - ppe
+  - other
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - nearGrab
   - Water
   - UI
-  - 
+  - ticket
   - 
   - 
   - 
