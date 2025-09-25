@@ -18,6 +18,13 @@ public class clipboardScrip : MonoBehaviour
 
     [SerializeField] XRInputValueReader<float> m_LeftGripInput = new XRInputValueReader<float>("Grip");
 
+    [SerializeField] public bool buttonPressed;
+
+
+
+    [SerializeField] GameObject page1;
+
+    [SerializeField] GameObject page2;
 
 
     [SerializeField] XRInputValueReader<float> m_RightGripInput = new XRInputValueReader<float>("Grip");
@@ -41,7 +48,7 @@ public class clipboardScrip : MonoBehaviour
             StartCoroutine(inputTimer(1));
         }
 
-        if (m_RightGripInput.ReadValue() > 0.75f && ticketTransform.childCount != 0)
+        if (m_RightGripInput.ReadValue() < 0.75f && ticketTransform.childCount != 0)
         {
             ticketTransform.GetChild(0).transform.SetParent(null);
         }
@@ -61,10 +68,11 @@ public class clipboardScrip : MonoBehaviour
     
     public void spawnPPETicket()
     {
+
         spawnTicket("no ppeoeppee","ppe");
     }
 
-    public void spawnOtherTicker()
+    public void spawnOtherTicket()
     {
         spawnTicket("other","other");
     }
@@ -72,10 +80,9 @@ public class clipboardScrip : MonoBehaviour
 
     private void spawnTicket(string ticketName,string tag)
     {
-        if (ticketTransform.childCount != 0)
-        {
+        if (ticketTransform.childCount != 0 || m_RightGripInput.ReadValue() < 0.95f)
             return;
-        }
+
         GameObject dude = Instantiate(ticketPrefab);
         dude.transform.SetParent(ticketTransform);
         dude.tag = tag;
@@ -83,9 +90,28 @@ public class clipboardScrip : MonoBehaviour
         dude.transform.localEulerAngles = new Vector3(0,180,0);
 
         dude.transform.GetComponentInChildren<TMP_Text>().text = ticketName;
-
     }
 
+
+    public void changePage()
+    {
+        if (page1.activeInHierarchy)
+        {
+            page1.SetActive(false);
+
+            page2.SetActive(true);
+        }
+
+        else
+        {
+
+            page1.SetActive(true);
+
+            page2.SetActive(false);
+        }
+
+
+    }
 
 
 }

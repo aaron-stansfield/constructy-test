@@ -34,4 +34,10 @@ public class situationScrip : MonoBehaviour
         return checks;
     }
 
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(this.transform.position, checkRadius);
+    }
+
 }
