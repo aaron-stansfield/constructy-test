@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class buttonScript : MonoBehaviour
+public class ppeTicketScript : MonoBehaviour
 {
     public clipboardScrip clipboard;
 

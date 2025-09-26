@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Linq;
+using System.Security.Authentication.ExtendedProtection;
 using TMPro;
 using UnityEngine;
 
@@ -8,8 +10,7 @@ public class gamerManage : MonoBehaviour
 
     [SerializeField] TMP_Text reportText;
 
-    private int runningTotal;
-
+    [SerializeField] clipboardScrip clipboard;
     [SerializeField] GameObject[] situations;
 
     public Hashtable reports = new Hashtable();
@@ -30,20 +31,43 @@ public class gamerManage : MonoBehaviour
 
     public void finished()
     {
+        //running total so the player gets a score/x at the end
+        int runningTotal = 0;
+
         int i = 0;
         foreach (GameObject situation in situations)
         {
-            reports.Add(i, situation.GetComponent<situationScrip>().report());
+            reports[i] = situation.GetComponent<situationScrip>().report();
             i++;
         }
 
+
+        //gets a bool[] from each scenario, index 0 being the ticket check and 1 being the fix check 
+        reportText.text = "";
         for (int j = 0; j < reports.Count; j++)
         {
-            Debug.Log(reports[j]);
-            runningTotal += (int)reports[j];
-        }
+            bool[] intermediate = (bool[])reports[j];
+            Debug.Log(intermediate[1]);
+            
+            if (intermediate[0])
+            {
+                runningTotal += 1;
+            }
 
-        reportText.text = ($"{runningTotal}/{reports.Count}");
+            if (intermediate[1])
+            {
+                runningTotal += 1;
+            }
+            // report for each scenario (just the ticket check for now)
+            reportText.text += ($"\n {situations[j].name}: ID / {intermediate[0]}, \n fix / {intermediate[1]}");
+        }
+        
+        //total score out of total number of scenarios
+        reportText.text += ($"\n total = {runningTotal}/{reports.Count * 2}");
+
+        //displays the report
+        clipboard.openReportPage();
+        
 
     }
 

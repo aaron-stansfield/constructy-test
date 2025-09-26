@@ -7,6 +7,10 @@ TagManager:
   - Anchor
   - ppe
   - other
+  - tripping hazard
+  - hazard
+  - floor sign
+  - respirator
   layers:
   - Default
   - TransparentFX
@@ -15,7 +19,7 @@ TagManager:
   - Water
   - UI
   - ticket
-  - 
+  - fixes
   - 
   - 
   - 

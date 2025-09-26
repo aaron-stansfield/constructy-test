@@ -1,15 +1,13 @@
 using UnityEngine;
 
-public class buttonScript1 : MonoBehaviour
+public class otherTicketScript : MonoBehaviour
 {
-    public GameObject clipboard;
+    public clipboardScrip clipboard;
 
-    private clipboardScrip clippy;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        clippy = clipboard.GetComponent<clipboardScrip>();
     }
 
     // Update is called once per frame
@@ -20,9 +18,9 @@ public class buttonScript1 : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("plo");
+
         if (other.CompareTag("GameController")){
-            clippy.spawnOtherTicket();
+            clipboard.spawnOtherTicket();
         }
     }
 
