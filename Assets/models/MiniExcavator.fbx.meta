@@ -1,9 +1,74 @@
 fileFormatVersion: 2
-guid: 80beda27143dc054a82dff6dcc4f179b
+guid: b53a35caef35b544f8e947b3ae11c11b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Arm
+    second: {fileID: 2100000, guid: e89bb4354ed304646a919ba82505b7f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Arm.001
+    second: {fileID: 2100000, guid: 94352c9b307475c46bc6970414847314, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BeltMetal
+    second: {fileID: 2100000, guid: d661980ad9ca96d4f8e585059bd2e0b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: ba1601c7c1207074d943bb8a9334d7b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: 768c27f950f56534fb9efa625fc6ac49, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 8458022ffb310e1409848d6e3f43efcf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: a2d654214a8d04740a28213382fb9849, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PlumMetal
+    second: {fileID: 2100000, guid: 95943cbf8a58c484d95b533871acd76f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ThreadMetal
+    second: {fileID: 2100000, guid: 2e32e9472397ac24285306453e7ee58c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TrackShieldMetal
+    second: {fileID: 2100000, guid: c2493801ad17ca94e97d954292297ac6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wheels
+    second: {fileID: 2100000, guid: 1d749bbc724ec53459b2781f2a34eb45, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: notjcb
+    second: {fileID: 2100000, guid: 2f46022b6e8d2ab449850522191dba6a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: notjcb.001
+    second: {fileID: 2100000, guid: a4edd54a8e5436246bb56f5cc05026b9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -68,9 +133,9 @@ ModelImporter:
     useFileScale: 1
     strictVertexDataChecks: 0
   tangentSpace:
-    normalSmoothAngle: 180
-    normalImportMode: 1
-    tangentImportMode: 1
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
