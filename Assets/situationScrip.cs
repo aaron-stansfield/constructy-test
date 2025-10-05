@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -6,7 +7,7 @@ public class situationScrip : MonoBehaviour
     [SerializeField] float checkRadius;
 
     [SerializeField] string expectedTicket;
-
+    
     [SerializeField] string expectedFix;
 
     public bool idCheck;
