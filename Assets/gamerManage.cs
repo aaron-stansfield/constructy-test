@@ -59,11 +59,11 @@ public class gamerManage : MonoBehaviour
                 runningTotal += 1;
             }
             // report for each scenario (just the ticket check for now)
-            reportText.text += ($"\n {situations[j].name}: IDd? / {(intermediate[0] ? "Identified" : "Missed")}, \n Fixed? / {(intermediate[1] ? "Yes" : "No")}");
+            reportText.text += ($"\n {situations[j].name}: ID / {intermediate[0]}, \n fix / {intermediate[1]}");
         }
         
         //total score out of total number of scenarios
-        reportText.text += ($"\n Final Score = {runningTotal}/{reports.Count * 2}");
+        reportText.text += ($"\n total = {runningTotal}/{reports.Count * 2}");
 
         //displays the report
         clipboard.openReportPage();

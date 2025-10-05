@@ -141,17 +141,18 @@ public class clipboardScrip : MonoBehaviour
     
     public void spawnPPETicket()
     {
-        spawnTicket("No PPE","ppe");
+
+        spawnTicket("no ppeoeppee","ppe");
     }
 
     public void spawnOtherTicket()
     {
-        spawnTicket("Other","other");
+        spawnTicket("other","other");
     }
 
     public void spawnTrippingHazardTicket()
     {
-        spawnTicket("Tripping Hazard", "tripping hazard");
+        spawnTicket("tripping hazard", "tripping hazard");
     }
 
     private void spawnTicket(string ticketName,string tag)
