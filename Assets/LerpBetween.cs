@@ -6,7 +6,7 @@ public class LerpBetween : MonoBehaviour
     [SerializeField]
     public GameObject[] objects = new GameObject[1];
 
-    [SerializeField, Range(0, 0.25f)]
+    [SerializeField, Range(0, 1f)]
     public float speed;
 
     [SerializeField]

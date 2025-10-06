@@ -14264,6 +14264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1393887227}
+  - component: {fileID: 1393887228}
   m_Layer: 0
   m_Name: handGunHolder
   m_TagString: Untagged
@@ -14287,6 +14288,32 @@ Transform:
   - {fileID: 630149238}
   m_Father: {fileID: 1373153107}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1393887228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393887226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 859e7302535fd55498806559da9e53e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  gunButton:
+    m_InputSourceMode: 2
+    m_InputAction:
+      m_Name: Press
+      m_Type: 0
+      m_ExpectedControlType: Axis
+      m_Id: cb8edb5c-943d-4ded-a196-bab1d7d4e072
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_InputActionReference: {fileID: 3770272181755780179, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    m_ObjectReferenceObject: {fileID: 0}
+    m_ManualValue: 0
 --- !u!1 &1461274832
 GameObject:
   m_ObjectHideFlags: 0
