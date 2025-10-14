@@ -1,4 +1,6 @@
+using MEC;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
@@ -31,16 +33,23 @@ public class clipboardScrip : MonoBehaviour
 
     [SerializeField] GameObject page3;
 
+    [SerializeField] GameObject smokeCloud;
+
+    [SerializeField] GameObject reverseSmokeCloud;
 
     [SerializeField] XRInputValueReader<float> m_LeftGripInput = new XRInputValueReader<float>("Grip");
 
     [SerializeField] XRInputValueReader<float> m_RightGripInput = new XRInputValueReader<float>("Grip");
 
     private float lastGripState;
+    private float scalething;
+    private Vector3 startPos = new(0.074f, -0.166f, 0f);
+    private Vector3 endPos;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        scalething = clipBoard.transform.localScale.x;
+        endPos = clipBoard.transform.localPosition;
     }
 
     // Update is called once per frame
@@ -53,7 +62,17 @@ public class clipboardScrip : MonoBehaviour
         {
             lastGripState = m_LeftGripInput.ReadValue();
             //invert state
-            clipBoard.SetActive(!clipBoard.gameObject.activeInHierarchy);
+            if (!clipBoard.activeSelf)
+            {
+                clipBoard.transform.localScale = Vector3.one / 10f;
+                clipBoard.transform.localPosition = startPos;
+                clipBoard.SetActive(!clipBoard.gameObject.activeInHierarchy);
+                Timing.RunCoroutine(scalything(true));
+            }
+            else
+            {
+                Timing.RunCoroutine(scalything(false));
+            }
             gripInputReady = false;
             StartCoroutine(inputTimer(1));
         }
@@ -127,6 +146,28 @@ public class clipboardScrip : MonoBehaviour
         }
     }
 
+
+    private IEnumerator<float> scalything(bool thing)
+    {
+        if (thing)
+            smokeCloud.GetComponent<ParticleSystem>().Play();
+        else
+            reverseSmokeCloud.GetComponent<ParticleSystem>().Play();
+
+            float time = 0;
+        while (time < 0.25f)
+        {
+            var val = thing ? Mathf.Lerp(0.1f, scalething+0.1f, time * 4) : Mathf.Lerp(scalething+0.1f, 0.1f, time*4);
+            Vector3 lerpedPos = thing ? Vector3.Lerp(startPos, endPos, time*4) : Vector3.Lerp(endPos, startPos, time *4);
+            clipBoard.transform.localPosition = lerpedPos;
+            clipBoard.transform.localScale = Vector3.one * val;
+            time += Time.deltaTime;
+            yield return Timing.WaitForOneFrame;
+        }
+        if (!thing)
+            clipBoard.SetActive(false);
+        yield return 0f;
+    }
 
     //timer so that inputs have a delay before they are read again
     private IEnumerator inputTimer(float time)
