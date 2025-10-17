@@ -1,16 +1,13 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Inputs.Readers;
 using MEC;
+using TMPro;
 
 public class GunScrip : MonoBehaviour
 {
+    [SerializeField] XRInputValueReader<float> m_RightGripInput = new XRInputValueReader<float>("Grip");
     [SerializeField] XRInputValueReader<float> gunButton = new XRInputValueReader<float>("primaryButton");
 
-<<<<<<< Updated upstream
-    private bool canInput = true;
-    private GameObject gun;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-=======
     [SerializeField] private GameObject gun;
     [SerializeField] private Transform ticketTransform;
     [SerializeField] private GameObject ticketPrefab;
@@ -27,18 +24,14 @@ public class GunScrip : MonoBehaviour
     private bool gripInputReady = true;
     private Transform heldTicket = null;
 
->>>>>>> Stashed changes
     void Start()
     {
-        gun = transform.GetChild(0).gameObject;
+        if (gun == null && transform.childCount > 0)
+            gun = transform.GetChild(0).gameObject;
     }
 
-    // Update is called once per frame
     void Update()
     {
-<<<<<<< Updated upstream
-        if(gunButton.ReadValue() > 0.75f && canInput)
-=======
         HandleGunToggle();
         HandleTicketSpawn();
 
@@ -51,15 +44,12 @@ public class GunScrip : MonoBehaviour
     private void HandleGunToggle()
     {
         if (gunButton.ReadValue() > 0.75f && canToggleGun)
->>>>>>> Stashed changes
         {
-            canInput = false;
-            Timing.CallDelayed(0.75f, () => { canInput = true; });
+            canToggleGun = false;
             gun.SetActive(!gun.activeSelf);
+            Timing.CallDelayed(0.75f, () => canToggleGun = true);
         }
     }
-<<<<<<< Updated upstream
-=======
 
     private void HandleTicketSpawn()
     {
@@ -110,5 +100,4 @@ public class GunScrip : MonoBehaviour
     {
         // can add later if wanted
     }
->>>>>>> Stashed changes
 }
