@@ -261,8 +261,10 @@ MonoBehaviour:
     m_InputActionReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: 0
+  selectorScrip: {fileID: 2058466853}
   rotation: 90
   coolDown: 0.3
+  gripReady: 1
   cubeRenderer: {fileID: 1399242556}
 --- !u!1 &74889111
 GameObject:
@@ -14397,7 +14399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4022796369627591441, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4059304439164382549, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -24575,8 +24577,10 @@ MonoBehaviour:
     m_InputActionReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_ObjectReferenceObject: {fileID: 0}
     m_ManualValue: 0
+  dialScip: {fileID: 66477393}
   rotation: 60
   coolDown: 0.3
+  gripReady: 1
 --- !u!1001 &2059872933
 PrefabInstance:
   m_ObjectHideFlags: 0

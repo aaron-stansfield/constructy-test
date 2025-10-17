@@ -10,10 +10,12 @@ public class TicketSelector : MonoBehaviour
 
     [SerializeField] private XRInputValueReader<float> m_LeftGripInput = new XRInputValueReader<float>("Grip");
 
+    [SerializeField] CriticalOption dialScip;
+
     [SerializeField] private float rotation = 60f;
     [SerializeField] private float coolDown = 0.3f;
 
-    private bool gripReady = true;
+    public bool gripReady = true;
     private int currentIndex = 0;
 
     private Quaternion baseRotation;
@@ -25,7 +27,7 @@ public class TicketSelector : MonoBehaviour
 
     private void Update()
     {
-        if (m_LeftGripInput.ReadValue() > 0.5f && gripReady && IsControllerNearCylinder())
+        if (m_LeftGripInput.ReadValue() > 0.5f && gripReady && IsControllerNearCylinder() && dialScip.gripReady)
         {
             Rotating();
             StartCoroutine(GripCooldown());
