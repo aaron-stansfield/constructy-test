@@ -15,7 +15,7 @@ public class CriticalOption : MonoBehaviour
     [SerializeField] private float coolDown = 0.3f;
 
     private bool gripReady = true;
-    private bool isRotated = false;
+    private bool isRotated;
 
     private Quaternion baseRotation;
 

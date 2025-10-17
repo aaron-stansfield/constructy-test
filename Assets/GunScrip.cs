@@ -8,6 +8,8 @@ public class GunScrip : MonoBehaviour
     [SerializeField] XRInputValueReader<float> m_RightGripInput = new XRInputValueReader<float>("Grip");
     [SerializeField] XRInputValueReader<float> gunButton = new XRInputValueReader<float>("primaryButton");
 
+    [SerializeField] GameObject controllerVisual;
+
     [SerializeField] private GameObject gun;
     [SerializeField] private Transform ticketTransform;
     [SerializeField] private GameObject ticketPrefab;
@@ -35,17 +37,22 @@ public class GunScrip : MonoBehaviour
         HandleGunToggle();
         HandleTicketSpawn();
 
+
+        // ticket pointing at gun end
         if ( currentDude != null)
         {
             currentDude.transform.LookAt(ticketTransformGun.position);
         }
     }
 
+
+    // turn gun on / off
     private void HandleGunToggle()
     {
         if (gunButton.ReadValue() > 0.75f && canToggleGun)
         {
             canToggleGun = false;
+            controllerVisual.SetActive(!controllerVisual.activeSelf);
             gun.SetActive(!gun.activeSelf);
             Timing.CallDelayed(0.25f, () => canToggleGun = true);
         }
@@ -75,7 +82,7 @@ public class GunScrip : MonoBehaviour
             {
                 int index = ticketSelector.GetCurrentIndex();
                 string[] hazardNames = {"ELECTRICAL", "TRIPPING HAZARD", "NO PPE", "OTHER", "GOOD", "CHEMICALS/DUST" };
-                string selectedHazard = hazardNames[(index % hazardNames.Length) ];
+                string selectedHazard = hazardNames[index % hazardNames.Length];
 
                 dude.name = "Ticket_" + selectedHazard;
                 TMP_Text label = dude.GetComponentInChildren<TMP_Text>();
@@ -90,14 +97,10 @@ public class GunScrip : MonoBehaviour
         if (m_RightGripInput.ReadValue() < 0.3f && heldTicket != null)
         {
             currentDude = null;
-            Timing.CallDelayed(0.75f, () => gripInputReady = true);
+            Timing.CallDelayed(0.25f, () => gripInputReady = true);
             heldTicket.SetParent(null);
             heldTicket = null;
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        // can add later if wanted
-    }
 }
