@@ -47,7 +47,7 @@ public class GunScrip : MonoBehaviour
         {
             canToggleGun = false;
             gun.SetActive(!gun.activeSelf);
-            Timing.CallDelayed(0.75f, () => canToggleGun = true);
+            Timing.CallDelayed(0.25f, () => canToggleGun = true);
         }
     }
 
@@ -61,14 +61,13 @@ public class GunScrip : MonoBehaviour
             GameObject dude = Instantiate(ticketPrefab);
             dude.transform.SetParent(ticketTransform);
             dude.transform.localPosition = Vector3.zero;
-            dude.transform.SetParent(null);
-            currentDude = dude;
+            
             heldTicket = dude.transform;
             //
 
             if (criticalOption != null)
             {
-                var renderer = dude.GetComponent<Renderer>();
+                var renderer = dude.transform.GetChild(0).GetChild(0).GetComponent<Renderer>();
                 if (renderer != null)
                     renderer.material.color = criticalOption.GetCurrentColor();
             }
@@ -83,8 +82,9 @@ public class GunScrip : MonoBehaviour
                 if (label != null)
                     label.text = selectedHazard;
             }
+            dude.transform.SetParent(null);
+            currentDude = dude;
 
-            
         }
 
         if (m_RightGripInput.ReadValue() < 0.3f && heldTicket != null)
