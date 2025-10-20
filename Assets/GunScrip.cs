@@ -18,7 +18,6 @@ public class GunScrip : MonoBehaviour
 
     private GameObject currentDude;
 
-    //new
     [SerializeField] private TicketSelector ticketSelector;
     [SerializeField] private CriticalOption criticalOption;
 

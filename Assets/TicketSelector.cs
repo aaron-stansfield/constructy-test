@@ -20,6 +20,12 @@ public class TicketSelector : MonoBehaviour
 
     private Quaternion baseRotation;
 
+    [SerializeField] private Collider TopBoxCollider;
+    [SerializeField] private Collider BottomBoxCollider;
+    private bool wasTop = false;
+    private bool wasBottom = false;
+    private bool swipeLocked = false; //stops multiple rotations per swipe
+
     private void Start()
     {
         baseRotation = cylinder.localRotation;
@@ -27,32 +33,54 @@ public class TicketSelector : MonoBehaviour
 
     private void Update()
     {
-        if (m_LeftGripInput.ReadValue() > 0.5f && gripReady && IsControllerNearCylinder() && dialScip.gripReady)
+        if (gripReady && dialScip.gripReady)
         {
-            Rotating();
-            StartCoroutine(GripCooldown());
+            DetectSwipe();//iterated so grip isnt needed
         }
-    }
-
-    private bool IsControllerNearCylinder()
-    {
-        Collider[] hits = Physics.OverlapSphere(leftController.transform.position, 0.05f);
-
-        foreach (Collider col in hits)
+        else
         {
-            if (col.transform == cylinder || col.gameObject.layer == LayerMask.NameToLayer("Cylinder"))
+            if (!TopBoxCollider.bounds.Contains(leftController.transform.position) &&
+                !BottomBoxCollider.bounds.Contains(leftController.transform.position))
             {
-                return true;
+                swipeLocked = false;
             }
         }
-        return false;
     }
 
-    private void Rotating()
+    private void DetectSwipe()
     {
-        currentIndex = (currentIndex + 1) % 6;
-        float newRotationY = currentIndex * rotation;
+        if (swipeLocked) return;
 
+        bool Top = TopBoxCollider.bounds.Contains(leftController.transform.position);
+        bool Bottom = BottomBoxCollider.bounds.Contains(leftController.transform.position);
+
+        //rotate backwards
+        if (wasBottom && Top)
+        {
+            Rotating(false);
+            swipeLocked = true;
+            StartCoroutine(GripCooldown());
+        }
+        //rotate forwards
+        else if (wasTop && Bottom)
+        {
+            Rotating(true);
+            swipeLocked = true;
+            StartCoroutine(GripCooldown());
+        }
+
+        wasTop = Top;
+        wasBottom = Bottom;
+    }
+
+    private void Rotating(bool forward = true)
+    {
+        if (forward)
+            currentIndex = (currentIndex + 1) % 6;
+        else
+            currentIndex = (currentIndex - 1 + 6) % 6;
+
+        float newRotationY = currentIndex * rotation;
         cylinder.localRotation = baseRotation * Quaternion.Euler(0f, newRotationY, 0f);
     }
 
@@ -74,3 +102,4 @@ public class TicketSelector : MonoBehaviour
     }
 
 }
+
