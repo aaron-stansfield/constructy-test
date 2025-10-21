@@ -10583,7 +10583,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 9f9fee6fb7ebd9246a56486349f85393, type: 3}
+  - {fileID: -876546973899608171, guid: f040fc618bacc264189b151e463e1dd0, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22587,7 +22587,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 9f9fee6fb7ebd9246a56486349f85393, type: 3}
+  - {fileID: -876546973899608171, guid: f040fc618bacc264189b151e463e1dd0, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -38064,6 +38064,8 @@ MonoBehaviour:
   page1: {fileID: 1565469104}
   page2: {fileID: 744655463}
   page3: {fileID: 648093374}
+  smokeCloud: {fileID: 0}
+  reverseSmokeCloud: {fileID: 0}
   m_LeftGripInput:
     m_InputSourceMode: 2
     m_InputAction:
