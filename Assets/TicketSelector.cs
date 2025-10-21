@@ -57,6 +57,7 @@ public class TicketSelector : MonoBehaviour
         //rotate backwards
         if (wasBottom && Top)
         {
+            Debug.Log("backward Rotate");
             Rotating(false);
             swipeLocked = true;
             StartCoroutine(GripCooldown());
@@ -64,6 +65,8 @@ public class TicketSelector : MonoBehaviour
         //rotate forwards
         else if (wasTop && Bottom)
         {
+
+            Debug.Log("forwards Rotate");
             Rotating(true);
             swipeLocked = true;
             StartCoroutine(GripCooldown());

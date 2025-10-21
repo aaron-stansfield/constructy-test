@@ -21,6 +21,10 @@ public class GunScrip : MonoBehaviour
     [SerializeField] private TicketSelector ticketSelector;
     [SerializeField] private CriticalOption criticalOption;
 
+
+    private bool triggerHeld;
+
+
     private bool canToggleGun = true;
     private bool gripInputReady = true;
     private Transform heldTicket = null;
@@ -41,6 +45,9 @@ public class GunScrip : MonoBehaviour
         if ( currentDude != null && gun.activeSelf)
         {
             currentDude.transform.LookAt(ticketTransformGun.position);
+            currentDude.transform.GetChild(0).transform.localScale = new Vector3(currentDude.transform.localScale.x, currentDude.transform.localScale.y, Vector3.Distance(currentDude.transform.position, gun.transform.position) *  8);
+            //if (currentDude.transform.GetChild(0).transform.localScale.z > currentDude.transform.GetChild(1).GetComponent<RectTransform>().)
+
         }
     }
 
@@ -69,8 +76,8 @@ public class GunScrip : MonoBehaviour
             dude.transform.localPosition = Vector3.zero;
             
             heldTicket = dude.transform;
-            //
-
+            
+        
             if (criticalOption != null)
             {
                 var renderer = dude.transform.GetChild(0).GetChild(0).GetComponent<Renderer>();
