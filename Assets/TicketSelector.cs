@@ -77,10 +77,12 @@ public class TicketSelector : MonoBehaviour
     {
         if (forward)
             currentIndex = (currentIndex + 1) % 6;
-        else
+        else 
             currentIndex = (currentIndex - 1 + 6) % 6;
 
-        float newRotationY = currentIndex * rotation;
+        Mathf.Clamp(currentIndex, 1 ,6); 
+
+            float newRotationY = currentIndex * rotation;
         cylinder.localRotation = baseRotation * Quaternion.Euler(0f, newRotationY, 0f);
     }
 
