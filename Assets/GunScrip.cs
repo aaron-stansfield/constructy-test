@@ -38,7 +38,7 @@ public class GunScrip : MonoBehaviour
 
 
         // ticket pointing at gun end
-        if ( currentDude != null)
+        if ( currentDude != null && gun.activeSelf)
         {
             currentDude.transform.LookAt(ticketTransformGun.position);
         }
@@ -65,7 +65,7 @@ public class GunScrip : MonoBehaviour
 
             //taken and slightly changed from clipboard script
             GameObject dude = Instantiate(ticketPrefab);
-            dude.transform.SetParent(ticketTransform);
+            dude.transform.SetParent(ticketTransformGun);
             dude.transform.localPosition = Vector3.zero;
             
             heldTicket = dude.transform;
@@ -88,9 +88,15 @@ public class GunScrip : MonoBehaviour
                 if (label != null)
                     label.text = selectedHazard;
             }
-            dude.transform.SetParent(null);
+            if(gun.activeSelf) dude.transform.SetParent(null);
             currentDude = dude;
 
+        }
+
+        if(m_RightGripInput.ReadValue() > 0.7f && heldTicket != null && !gun.activeSelf)
+        {
+            heldTicket.SetParent(ticketTransform);
+            heldTicket.transform.position = Vector3.zero;
         }
 
         if (m_RightGripInput.ReadValue() < 0.3f && heldTicket != null)
