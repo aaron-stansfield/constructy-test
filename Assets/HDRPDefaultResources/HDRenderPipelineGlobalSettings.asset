@@ -194,7 +194,26 @@ MonoBehaviour:
       - rid: 4341616399313534977
       - rid: 4341616399313534978
     m_RuntimeSettings:
-      m_List: []
+      m_List:
+      - rid: 1036468474873381057
+      - rid: 1036468474873381058
+      - rid: 1036468474873381059
+      - rid: 1036468474873381061
+      - rid: 1036468474873381062
+      - rid: 1036468474873381065
+      - rid: 1036468474873381066
+      - rid: 1036468474873381067
+      - rid: 1036468474873381068
+      - rid: 1036468474873381071
+      - rid: 1036468474873381072
+      - rid: 1036468474873381073
+      - rid: 1036468474873381074
+      - rid: 1036468474873381078
+      - rid: 1036468474873381079
+      - rid: 1036468474873381083
+      - rid: 1036468474873381084
+      - rid: 1036468474873381085
+      - rid: 1036468474873381086
   renderingLayerNames:
   - Default
   lightLayerName0: 
@@ -224,6 +243,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 1036468474873381054
       type: {class: HDRPRayTracingResources, ns: UnityEngine.Rendering.HighDefinition, asm: Unity.RenderPipelines.HighDefinition.Runtime}
       data:

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e9ee453a1dcfac64a92df14dfc5c3d60
+guid: 2792f078ca47f7941912fe770e2e2131
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -8,7 +8,17 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: brick texture
-    second: {fileID: 2800000, guid: 988ec8821d19acc46b6ca8ce36313867, type: 3}
+    second: {fileID: 2800000, guid: 4179a465ab117984ba53125587bef27e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: drywall
+    second: {fileID: 2800000, guid: a4379efef09615b4cb77da0afc068404, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: woodGrain
+    second: {fileID: 2800000, guid: 083cfae36b51bd94586fa2814c1e2ca5, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
