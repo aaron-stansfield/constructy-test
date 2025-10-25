@@ -16102,6 +16102,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 0314fb346ea742c43bb1dfcf0f03451a, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3fbbae7e343a0604ca8c5f8553701a53, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 0314fb346ea742c43bb1dfcf0f03451a, type: 3}
+      propertyPath: 'm_Materials.Array.data[4]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c2fa526a5b2bc3459f6a701d6944292, type: 2}
     - target: {fileID: 919132149155446097, guid: 0314fb346ea742c43bb1dfcf0f03451a, type: 3}
       propertyPath: m_Name
       value: scaffolding2ConstructyBoogaloo
