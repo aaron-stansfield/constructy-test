@@ -1,7 +1,8 @@
-using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit.Inputs.Readers;
 using MEC;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Animations.Rigging;
+using UnityEngine.XR.Interaction.Toolkit.Inputs.Readers;
 
 public class GunScrip : MonoBehaviour
 {
@@ -10,10 +11,13 @@ public class GunScrip : MonoBehaviour
 
     [SerializeField] GameObject controllerVisual;
 
+    [SerializeField] GameObject rightController;
+
     [SerializeField] private GameObject gun;
     [SerializeField] private Transform ticketTransform;
     [SerializeField] private GameObject ticketPrefab;
     [SerializeField] private LayerMask ticketLayer;
+    [SerializeField] private LayerMask fixLayer;
     [SerializeField] Transform ticketTransformGun;
 
     private GameObject currentDude;
@@ -27,7 +31,7 @@ public class GunScrip : MonoBehaviour
 
     private bool canToggleGun = true;
     private bool gripInputReady = true;
-    private Transform heldTicket = null;
+    [SerializeField] GameObject heldTicket = null;
 
     void Start()
     {
@@ -42,10 +46,10 @@ public class GunScrip : MonoBehaviour
 
 
         // ticket pointing at gun end
-        if ( currentDude != null && gun.activeSelf)
+        if ( heldTicket != null && gun.activeSelf)
         {
-            currentDude.transform.LookAt(ticketTransformGun.position);
-            currentDude.transform.GetChild(0).transform.localScale = new Vector3(currentDude.transform.localScale.x, currentDude.transform.localScale.y, Vector3.Distance(currentDude.transform.position, gun.transform.position) *  8);
+            heldTicket.transform.LookAt(ticketTransformGun.position);
+            heldTicket.transform.GetChild(0).transform.localScale = new Vector3(heldTicket.transform.localScale.x, heldTicket.transform.localScale.y, Vector3.Distance(heldTicket.transform.position, gun.transform.position) *  8);
             //if (currentDude.transform.GetChild(0).transform.localScale.z > currentDude.transform.GetChild(1).GetComponent<RectTransform>().)
 
         }
@@ -75,7 +79,7 @@ public class GunScrip : MonoBehaviour
             dude.transform.SetParent(ticketTransformGun);
             dude.transform.localPosition = Vector3.zero;
             
-            heldTicket = dude.transform;
+            heldTicket = dude;
             
         
             if (criticalOption != null)
@@ -96,22 +100,65 @@ public class GunScrip : MonoBehaviour
                     label.text = selectedHazard;
             }
             if(gun.activeSelf) dude.transform.SetParent(null);
-            currentDude = dude;
 
         }
 
         if(m_RightGripInput.ReadValue() > 0.7f && heldTicket != null && !gun.activeSelf)
         {
-            heldTicket.SetParent(ticketTransform);
-            heldTicket.transform.position = Vector3.zero;
+            //heldTicket.transform.SetParent(ticketTransform);
+            //heldTicket.transform.position = Vector3.zero;
         }
+
+        else if (m_RightGripInput.ReadValue() > 0.7f && heldTicket == null && !gun.activeInHierarchy)
+        {
+            foreach (Collider col in Physics.OverlapSphere(rightController.transform.position, rightController.GetComponent<SphereCollider>().radius, fixLayer))
+            {
+                heldTicket = col.gameObject;
+                col.gameObject.transform.SetParent(ticketTransform);
+
+                col.transform.localPosition = Vector3.zero;
+
+                return;
+            }
+
+            foreach (Collider col in Physics.OverlapSphere(rightController.transform.position, rightController.GetComponent<SphereCollider>().radius, ticketLayer))
+            {
+                heldTicket = col.gameObject;
+                col.gameObject.transform.SetParent(ticketTransform);
+
+                col.transform.localPosition = Vector3.zero;
+
+                //puts the ticket in the correct orientation relative to the controller
+                col.transform.localEulerAngles = new Vector3(0, 180, 0);
+                return;
+            }
+        }
+
+
 
         if (m_RightGripInput.ReadValue() < 0.3f && heldTicket != null)
         {
-            currentDude = null;
+            bool inHazard = false;
+            foreach (Collider col in Physics.OverlapSphere(heldTicket.transform.position, 0.01f))
+            {
+                if (col.CompareTag("hazard"))
+                {
+                    inHazard = true;
+                    break;
+
+                }
+            }
+            if (!inHazard)
+            {
+                Destroy(heldTicket);
+            }
+
+            heldTicket.transform.SetParent(null);
             Timing.CallDelayed(0.25f, () => gripInputReady = true);
-            heldTicket.SetParent(null);
+            heldTicket.transform.SetParent(null);
+
             heldTicket = null;
+
         }
     }
 
