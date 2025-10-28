@@ -5,13 +5,16 @@ TagManager:
   serializedVersion: 3
   tags:
   - Anchor
-  - ppe
   - other
-  - tripping hazard
   - hazard
   - floor sign
   - respirator
   - AttatchArea
+  - electrical
+  - noPPE
+  - good
+  - chemical
+  - trippingHazard
   layers:
   - Default
   - TransparentFX

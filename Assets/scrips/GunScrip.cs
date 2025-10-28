@@ -20,6 +20,16 @@ public class GunScrip : MonoBehaviour
     [SerializeField] private LayerMask fixLayer;
     [SerializeField] Transform ticketTransformGun;
 
+    private string[] ticketTags = new string[]
+    {
+        "electrical",
+        "trippingHazard",
+        "noPPE",
+        "other",
+        "good",
+        "chemical"
+    };
+
     private GameObject currentDude;
 
     [SerializeField] private TicketSelector ticketSelector;
@@ -95,6 +105,7 @@ public class GunScrip : MonoBehaviour
                 string selectedHazard = hazardNames[index % hazardNames.Length];
 
                 dude.name = "Ticket_" + selectedHazard;
+                dude.tag = (string)ticketTags[index];
                 TMP_Text label = dude.GetComponentInChildren<TMP_Text>();
                 if (label != null)
                     label.text = selectedHazard;
@@ -141,20 +152,19 @@ public class GunScrip : MonoBehaviour
             bool inHazard = false;
             foreach (Collider col in Physics.OverlapSphere(heldTicket.transform.position, 0.01f))
             {
-                if (col.CompareTag("AttatchArea"))
+                if (col.CompareTag("AttatchArea") && heldTicket.gameObject.transform.GetComponent<AttatchObject>() != null)
                 {
                     heldTicket.gameObject.transform.GetComponent<AttatchObject>().StartLerp();
                     heldTicket.transform.SetParent(col.gameObject.transform);
                     inHazard = true;
-                    continue;
+                    break;
                 }
-                //else if (col.CompareTag("hazard"))
-                //{
-                //    
-                //    heldTicket.transform.SetParent(null);
-                //    inHazard = true;
-                //    conti;
-                //}
+                else if (col.CompareTag("hazard"))
+                { 
+                    heldTicket.transform.SetParent(null);
+                    inHazard = true;
+                    break;
+                }
             }
             if (!inHazard)
             {
