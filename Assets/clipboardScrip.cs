@@ -87,7 +87,7 @@ public class clipboardScrip : MonoBehaviour
             {
                 if (col.CompareTag("hazard"))
                 {
-                    ticketTransform.GetChild(0).transform.SetParent(null);
+                    //ticketTransform.GetChild(0).transform.SetParent(null);
                     return;
 
                 }

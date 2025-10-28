@@ -141,22 +141,26 @@ public class GunScrip : MonoBehaviour
             bool inHazard = false;
             foreach (Collider col in Physics.OverlapSphere(heldTicket.transform.position, 0.01f))
             {
-                if (col.CompareTag("hazard"))
+                if (col.CompareTag("AttatchArea"))
                 {
+                    heldTicket.gameObject.transform.GetComponent<AttatchObject>().StartLerp();
+                    heldTicket.transform.SetParent(col.gameObject.transform);
                     inHazard = true;
-                    break;
-
+                    continue;
                 }
+                //else if (col.CompareTag("hazard"))
+                //{
+                //    
+                //    heldTicket.transform.SetParent(null);
+                //    inHazard = true;
+                //    conti;
+                //}
             }
             if (!inHazard)
             {
                 Destroy(heldTicket);
             }
-
-            heldTicket.transform.SetParent(null);
             Timing.CallDelayed(0.25f, () => gripInputReady = true);
-            heldTicket.transform.SetParent(null);
-
             heldTicket = null;
 
         }
