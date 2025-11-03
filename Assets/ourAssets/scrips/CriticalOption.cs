@@ -12,7 +12,7 @@ public class CriticalOption : MonoBehaviour
 
     [SerializeField] TicketSelector selectorScrip;
 
-    [SerializeField] private float rotation = 90f; //
+    [SerializeField] private float rotation = 90f; 
     [SerializeField] private float coolDown = 0.3f;
 
     public bool gripReady = true;
@@ -20,7 +20,8 @@ public class CriticalOption : MonoBehaviour
 
     private Quaternion baseRotation;
 
-    [SerializeField] private Renderer cubeRenderer; //may work
+    //new
+    [SerializeField] private Renderer[] cubeRenderers;
 
     private void Start()
     {
@@ -57,19 +58,24 @@ public class CriticalOption : MonoBehaviour
 
         if (isRotated)
         {
-
             cylinder.localRotation = baseRotation * Quaternion.Euler(0f, rotation, 0f);
-
-            if (cubeRenderer != null)
-                cubeRenderer.material.color = Color.red; //new
+            SetAllCubeColors(Color.red); 
         }
         else
         {
             cylinder.localRotation = baseRotation;
+            SetAllCubeColors(Color.yellow); 
+        }
+    }
 
-            if (cubeRenderer != null)
-                cubeRenderer.material.color = Color.yellow; //new
+    private void SetAllCubeColors(Color color)
+    {
+        if (cubeRenderers == null || cubeRenderers.Length == 0) return;
 
+        foreach (Renderer r in cubeRenderers)
+        {
+            if (r != null)
+                r.material.color = color;
         }
     }
 
@@ -89,5 +95,4 @@ public class CriticalOption : MonoBehaviour
     {
         return isRotated ? Color.red : Color.yellow;
     }
-
 }
