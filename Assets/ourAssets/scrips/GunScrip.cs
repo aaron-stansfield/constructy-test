@@ -20,6 +20,10 @@ public class GunScrip : MonoBehaviour
     [SerializeField] private LayerMask fixLayer;
     [SerializeField] Transform ticketTransformGun;
 
+
+    //newnewnew
+    [SerializeField] private Renderer[] gunRenderers;
+
     private string[] ticketTags = new string[]
     {
         "electrical",
@@ -47,6 +51,13 @@ public class GunScrip : MonoBehaviour
     {
         if (gun == null && transform.childCount > 0)
             gun = transform.GetChild(0).gameObject;
+
+        if (ticketSelector != null)
+        {
+            ticketSelector.OnTicketChanged += UpdateGunColor;
+            UpdateGunColor(ticketSelector.GetCurrentIndex()); // set initial colour
+        }
+
     }
 
     void Update()
@@ -101,7 +112,7 @@ public class GunScrip : MonoBehaviour
             if (ticketSelector != null)
             {
                 int index = ticketSelector.GetCurrentIndex();
-                string[] hazardNames = {"ELECTRICAL", "TRIPPING HAZARD", "NO PPE", "OTHER", "GOOD", "CHEMICALS/DUST" };
+                string[] hazardNames = {"VIBRATION", "NOISE", "DUST", "GOOD", "MANUAL HANDLING", "CHEMICALS/FUMES" };
                 string selectedHazard = hazardNames[index % hazardNames.Length];
 
                 tempHeldTicket.name = "Ticket_" + selectedHazard;
@@ -190,5 +201,49 @@ public class GunScrip : MonoBehaviour
 
         }
     }
+
+    //newnewnew
+    private void UpdateGunColor(int index)
+    {
+        if (gunRenderers == null || gunRenderers.Length == 0) return;
+
+        Color targetColor = Color.white;
+
+        switch (index)
+        {
+            case 0: //vibration
+                targetColor = Color.red;
+                break;
+            case 1: //noise
+                targetColor = new Color(0.5f, 0f, 0.5f); // purple
+                break;
+            case 2: //dust
+                targetColor = new Color(1f, 0.5f, 0f); // orange
+                break;
+            case 3: //good
+                targetColor = Color.green;
+                break;
+            case 4: //manual handling
+                targetColor = Color.blue;
+                break;
+            case 5: //chemicals/fumes
+                targetColor = Color.yellow;
+                break;
+        }
+
+        //made into an array because gun object has 3 3d objects
+        foreach (Renderer r in gunRenderers)
+        {
+            if (r != null)
+                r.material.color = targetColor;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (ticketSelector != null)
+            ticketSelector.OnTicketChanged -= UpdateGunColor;
+    }
+
 
 }

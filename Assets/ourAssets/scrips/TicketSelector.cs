@@ -12,88 +12,71 @@ public class TicketSelector : MonoBehaviour
 
     [SerializeField] CriticalOption dialScip;
 
-    [SerializeField] private float rotation = 60f;
-    [SerializeField] private float coolDown = 0.3f;
+    //newnewnew
+    [SerializeField] private float rotationPerTicket = 60f; 
+    [SerializeField] private float scrollSensitivity = 5f;
+    [SerializeField] private float snapSpeed = 10f; 
 
     public bool gripReady = true;
+    private float currentRotation = 0f; // continuous rotation value
     private int currentIndex = 0;
 
     private Quaternion baseRotation;
 
     [SerializeField] private Collider TopBoxCollider;
     [SerializeField] private Collider BottomBoxCollider;
-    private bool wasTop = false;
-    private bool wasBottom = false;
-    private bool swipeLocked = false; //stops multiple rotations per swipe
+
+    public delegate void TicketChangedEvent(int newIndex);
+    public event TicketChangedEvent OnTicketChanged;
 
     private void Start()
     {
         baseRotation = cylinder.localRotation;
+        currentRotation = 0f;
     }
 
     private void Update()
     {
-        if (gripReady && dialScip.gripReady)
+        HandleScroll();
+    }
+
+    private void HandleScroll()
+    {
+        if (!IsControllerNearCylinder()) return;
+        float controllerY = leftController.transform.position.y;
+        float deltaY = controllerY * scrollSensitivity * Time.deltaTime;
+
+        currentRotation += deltaY;
+        cylinder.localRotation = baseRotation * Quaternion.Euler(0f, currentRotation, 0f);
+
+        int newIndex = Mathf.RoundToInt(currentRotation / rotationPerTicket) % 6;
+        if (newIndex < 0) newIndex += 6; 
+        if (newIndex != currentIndex)
         {
-            DetectSwipe();//iterated so grip isnt needed
+            currentIndex = newIndex;
+            OnTicketChanged?.Invoke(currentIndex);
         }
-        else
+
+        if (Mathf.Abs(deltaY) < 0.001f)
         {
-            if (!TopBoxCollider.bounds.Contains(leftController.transform.position) &&
-                !BottomBoxCollider.bounds.Contains(leftController.transform.position))
+            float targetRotation = currentIndex * rotationPerTicket;
+            currentRotation = Mathf.Lerp(currentRotation, targetRotation, Time.deltaTime * snapSpeed);
+            cylinder.localRotation = baseRotation * Quaternion.Euler(0f, currentRotation, 0f);
+        }
+    }
+
+    private bool IsControllerNearCylinder()
+    {
+        Collider[] hits = Physics.OverlapSphere(leftController.transform.position, 0.05f);
+
+        foreach (Collider col in hits)
+        {
+            if (col.transform == cylinder || col.gameObject.layer == LayerMask.NameToLayer("Cylinder"))
             {
-                swipeLocked = false;
+                return true;
             }
         }
-    }
-
-    private void DetectSwipe()
-    {
-        if (swipeLocked) return;
-
-        bool Top = TopBoxCollider.bounds.Contains(leftController.transform.position);
-        bool Bottom = BottomBoxCollider.bounds.Contains(leftController.transform.position);
-
-        //rotate backwards
-        if (wasBottom && Top)
-        {
-            Debug.Log("backward Rotate");
-            Rotating(false);
-            swipeLocked = true;
-            StartCoroutine(GripCooldown());
-        }
-        //rotate forwards
-        else if (wasTop && Bottom)
-        {
-
-            Debug.Log("forwards Rotate");
-            Rotating(true);
-            swipeLocked = true;
-            StartCoroutine(GripCooldown());
-        }
-
-        wasTop = Top;
-        wasBottom = Bottom;
-    }
-
-    private void Rotating(bool forward = true)
-    {
-        if (forward)
-            currentIndex = (currentIndex + 1) % 6;
-        else 
-            currentIndex = (currentIndex - 1 + 6) % 6;
-
-        Mathf.Clamp(currentIndex, 1 ,6); 
-
-            float newRotationY = currentIndex * rotation;
-        cylinder.localRotation = baseRotation * Quaternion.Euler(0f, newRotationY, 0f);
-    }
-
-    private IEnumerator GripCooldown()
-    {
-        gripReady = false;
-        yield return new WaitForSeconds(coolDown);
-        gripReady = true;
+        return false;
     }
 
     private void OnDrawGizmos()
@@ -105,6 +88,4 @@ public class TicketSelector : MonoBehaviour
     {
         return currentIndex;
     }
-
 }
-
