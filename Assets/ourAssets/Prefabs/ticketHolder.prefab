@@ -367,6 +367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8514285755002807490}
   - component: {fileID: 5422302570781707961}
+  - component: {fileID: 7349278707748577246}
   m_Layer: 6
   m_Name: ticketHolder
   m_TagString: Untagged
@@ -411,3 +412,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.031299114, y: 0.07972865, z: 0.20786953}
   m_Center: {x: -0.0024392605, y: -0.0014130995, z: 0.08577633}
+--- !u!114 &7349278707748577246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7250605650839204158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e48663ca5ac58b44a099590390d7bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
