@@ -15,7 +15,7 @@ public class TicketInteraction : MonoBehaviour, interactionInterface
         if (this.transform.parent != null)
         {
             transform.localPosition = Vector3.zero;
-            transform.localEulerAngles = new Vector3(0,90,0);
+            //transform.localEulerAngles = new Vector3(0,90,0);
         }
     }
 
@@ -30,7 +30,7 @@ public class TicketInteraction : MonoBehaviour, interactionInterface
         this.transform.localPosition = Vector3.zero;
 
         //puts the ticket in the correct orientation relative to the controller
-        transform.localEulerAngles = new Vector3(0, 90, 0);
+        //transform.localEulerAngles = new Vector3(0, 90, 0);
     }
 
     public void drop()

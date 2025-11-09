@@ -1,4 +1,5 @@
 using MEC;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -6,7 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit.Inputs.Readers;
 public class GunScrip : MonoBehaviour
 {
 
-    //[SerializeField] XRInputValueReader<float> m_RightGripInput = new XRInputValueReader<float>("Grip");
+    [SerializeField] XRInputValueReader<float> m_RightGripInput = new XRInputValueReader<float>("Grip");
 
 
     [SerializeField] XRInputValueReader<float> m_TriggerInput = new XRInputValueReader<float>("Trigger");
@@ -63,35 +64,51 @@ public class GunScrip : MonoBehaviour
 
     void Update()
     {
-        if (m_TriggerInput.ReadValue() > 0.8f)
+        if (heldItem == null)
         {
-            HandleTicketSpawn();
+            if (m_TriggerInput.ReadValue() > 0.8f)
+            {
+                HandleTicketSpawn();
+            }
+            if (m_RightGripInput.ReadValue() > 0.8f)
+            {
+
+                foreach (Collider col in Physics.OverlapSphere(rightController.transform.position, ticketTransformGun.GetComponent<SphereCollider>().radius, ticketLayer))
+                {
+                    if (col.gameObject.GetComponent<interactionInterface>() == null) return;
+
+                    Debug.Log("gleep");
+                    Destroy(col.gameObject);
+
+                    break;
+                }
+
+            }
+
         }
-        else if (m_TriggerInput.ReadValue() < 0.2f)
+        else if (heldItem != null)
         {
-            stopTicketing();
+            if (m_TriggerInput.ReadValue() < 0.2f)
+            {
+                stopTicketing();
+            }
         }
 
-
-        // ticket pointing at gun end
-        if (heldItem != null && gun.activeSelf)
-        {
-            heldItem.transform.LookAt(ticketTransformGun.position);
-            heldItem.transform.transform.localScale = new Vector3(heldItem.transform.localScale.x, heldItem.transform.localScale.y, Vector3.Distance(heldItem.transform.position, gun.transform.position) * 8);
-            //if (currentDude.transform.GetChild(0).transform.localScale.z > currentDude.transform.GetChild(1).GetComponent<RectTransform>().)
-
-        }
     }
-
-
-    // turn gun on / off
-
 
     public void stopTicketing()
     {
-        if (heldItem == null) return;
+        try
+        {
+            heldItem.GetComponent<tapeScrip>().stopDispensing();
+        }
+        catch
+        {
+            Debug.Log("blop");
+        }
 
-        heldItem.transform.SetParent(null);
+
+        //heldItem.transform.SetParent(null);
 
         heldItem = null;
 
@@ -108,7 +125,7 @@ public class GunScrip : MonoBehaviour
             GameObject tempHeldTicket = Instantiate(ticketPrefab);
             tempHeldTicket.transform.SetParent(ticketTransformGun);
             tempHeldTicket.transform.localPosition = Vector3.zero;
-            
+
             heldItem = tempHeldTicket;
             
         
@@ -131,6 +148,15 @@ public class GunScrip : MonoBehaviour
                     label.text = selectedHazard;
             }
             if(gun.activeSelf) tempHeldTicket.transform.SetParent(null);
+
+            try
+            {
+                tempHeldTicket.GetComponent<tapeScrip>().startDispensing(ticketTransformGun, tempHeldTicket);
+            }
+            catch (NullReferenceException)
+            {
+                Debug.Log("no component headass");
+            }
 
         }
 
