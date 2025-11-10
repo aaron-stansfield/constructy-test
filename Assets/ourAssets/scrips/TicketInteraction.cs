@@ -1,8 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Inputs.Readers;
 
 public class TicketInteraction : MonoBehaviour, interactionInterface
 {
+
+
+
+    [SerializeField] XRInputValueReader<float> m_RightGripInput = new XRInputValueReader<float>("Grip");
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     //virtual public void pickUpObject(bool ongoing)
@@ -19,7 +25,7 @@ public class TicketInteraction : MonoBehaviour, interactionInterface
         }
     }
 
-    void interactionInterface.pickUpObj(Transform guy)
+    void interactionInterface.interactWithObj(Transform guy)
     {
         Debug.Log("shleeb");
 
@@ -36,17 +42,6 @@ public class TicketInteraction : MonoBehaviour, interactionInterface
     public void drop()
     {
         this.transform.SetParent(null);
-
-        foreach (Collider col in Physics.OverlapSphere(this.transform.position, 0.01f))
-        {
-            if (col.CompareTag("AttatchArea"))
-            {
-                this.gameObject.transform.GetComponent<AttatchObject>().StartLerp();
-                this.transform.SetParent(col.gameObject.transform);
-                //inHazard = true;
-                break;
-            }
-        }
 
 
     }

@@ -38,6 +38,8 @@ public class tapeScrip : MonoBehaviour
         while (ongoing)
         {
 
+            //forgive me for i have sinned
+
             if (Vector3.Distance(currentTicketSection.transform.position, ticketTransform.position) >
                 Vector3.Distance(currentTicketSection.transform.position, currentTicketSection.transform.GetChild(1).position))
             {
@@ -46,7 +48,6 @@ public class tapeScrip : MonoBehaviour
                 
                 currentTicketSection.transform.localScale = new Vector3(0.69359f, 0.69359f, 0.69359f);
 
-                //forgive me for i have sinned
                 currentTicketSection.transform.GetChild(0).GetComponent<Renderer>().material.color = 
                     lastTicket.transform.GetChild(0).GetComponent<Renderer>().material.color;
 

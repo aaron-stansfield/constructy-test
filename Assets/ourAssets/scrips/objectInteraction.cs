@@ -1,8 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Inputs.Readers;
 
 public class objectInteraction : MonoBehaviour, interactionInterface
 {
+
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     //virtual public void pickUpObject(bool ongoing)
@@ -19,8 +23,9 @@ public class objectInteraction : MonoBehaviour, interactionInterface
         }
     }
 
-    void interactionInterface.pickUpObj(Transform guy)
+    void interactionInterface.interactWithObj(Transform guy)
     {
+
         Debug.Log("shleeb");
 
 
@@ -36,6 +41,7 @@ public class objectInteraction : MonoBehaviour, interactionInterface
 
     public void drop()
     {
+
         this.transform.SetParent(null);
 
         foreach (Collider col in Physics.OverlapSphere(this.transform.position, 0.01f))

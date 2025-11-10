@@ -46,7 +46,23 @@ public class controllerScrip : MonoBehaviour
         {
             drop();
         }
+
+
+        buttonSlapCheck();
+
+
     }
+
+    void buttonSlapCheck()
+    {
+        foreach (Collider col in Physics.OverlapSphere(rightController.transform.position, rightController.GetComponent<SphereCollider>().radius))
+        {
+            if (col.GetComponent<buttonInteraction>() == null) return;
+
+            col.GetComponent<buttonInteraction>().interact();
+        }
+    }
+
 
     void pickUp()
     {
@@ -56,7 +72,7 @@ public class controllerScrip : MonoBehaviour
 
             heldItem = col.gameObject;
             Debug.Log("gleep");
-            col.gameObject.GetComponent<interactionInterface>().pickUpObj(holdPointTransform);
+            col.gameObject.GetComponent<interactionInterface>().interactWithObj(holdPointTransform);
 
             break;
         }

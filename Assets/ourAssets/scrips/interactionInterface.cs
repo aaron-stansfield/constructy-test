@@ -8,7 +8,7 @@ public interface interactionInterface
     //virtual public void pickUpObj(bool ongoing){
     //}
 
-    abstract public void pickUpObj(Transform transform);
+    abstract public void interactWithObj(Transform transform);
 
     virtual public void drop(){
 
