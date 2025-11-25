@@ -46,7 +46,7 @@ public class objectInteraction : MonoBehaviour, interactionInterface
 
         foreach (Collider col in Physics.OverlapSphere(this.transform.position, 0.01f))
         {
-            if (col.CompareTag("AttatchArea"))
+            if (col.CompareTag("AttatchArea") && this.gameObject.GetComponent<AttatchObject>() != null)
             {
                 this.gameObject.transform.GetComponent<AttatchObject>().StartLerp();
                 this.transform.SetParent(col.gameObject.transform);
