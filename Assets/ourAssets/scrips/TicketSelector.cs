@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.XR.Interaction.Toolkit.Inputs.Readers;
+using UnityEngine.UIElements;
 
 public class TicketSelector : MonoBehaviour
 {
@@ -35,48 +36,11 @@ public class TicketSelector : MonoBehaviour
         currentRotation = 0f;
     }
 
-    private void Update()
+    private void InteractionComplete()
     {
-        HandleScroll();
-    }
-
-    private void HandleScroll()
-    {
-        if (!IsControllerNearCylinder()) return;
-        float controllerY = leftController.transform.position.y;
-        float deltaY = controllerY * scrollSensitivity * Time.deltaTime;
-
-        currentRotation += deltaY;
-        cylinder.localRotation = baseRotation * Quaternion.Euler(0f, currentRotation, 0f);
-
-        int newIndex = Mathf.RoundToInt(currentRotation / rotationPerTicket) % 6;
-        if (newIndex < 0) newIndex += 6; 
-        if (newIndex != currentIndex)
-        {
-            currentIndex = newIndex;
-            OnTicketChanged?.Invoke(currentIndex);
-        }
-
-        if (Mathf.Abs(deltaY) < 0.001f)
-        {
-            float targetRotation = currentIndex * rotationPerTicket;
-            currentRotation = Mathf.Lerp(currentRotation, targetRotation, Time.deltaTime * snapSpeed);
-            cylinder.localRotation = baseRotation * Quaternion.Euler(0f, currentRotation, 0f);
-        }
-    }
-
-    private bool IsControllerNearCylinder()
-    {
-        Collider[] hits = Physics.OverlapSphere(leftController.transform.position, 0.05f);
-
-        foreach (Collider col in hits)
-        {
-            if (col.transform == cylinder || col.gameObject.layer == LayerMask.NameToLayer("Cylinder"))
-            {
-                return true;
-            }
-        }
-        return false;
+        float a = cylinder.localEulerAngles.x;
+        a %= 360;
+        OnTicketChanged?.Invoke((int)(a / 6));
     }
 
     private void OnDrawGizmos()
