@@ -49,8 +49,7 @@ public class objectInteraction : MonoBehaviour, interactionInterface
             if (col.CompareTag("AttatchArea") && this.gameObject.GetComponent<AttatchObject>() != null)
             {
                 this.gameObject.transform.GetComponent<AttatchObject>().StartLerp();
-                this.transform.SetParent(col.gameObject.transform);
-                //inHazard = true;
+                this.transform.SetParent(col.gameObject.transform);                //inHazard = true;
                 break;
             }
         }

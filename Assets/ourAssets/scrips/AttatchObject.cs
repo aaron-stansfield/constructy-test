@@ -6,6 +6,9 @@ public class AttatchObject : MonoBehaviour
     public Transform targetTransform;
     public float lerpDuration = 2f;
 
+    public bool hasPivot;
+    public float pivotDifference;
+
 
     private bool isLerping = false;
 
@@ -31,6 +34,16 @@ public class AttatchObject : MonoBehaviour
     {
         isLerping = true;
 
+        Vector3 newTarget;
+        newTarget = targetPos;
+        if (hasPivot)
+        {
+            gameObject.GetComponent<Rigidbody>().useGravity = false;
+            gameObject.GetComponentInChildren<MeshCollider>().enabled = false;
+
+            newTarget = new Vector3(targetPos.x, targetPos.y + pivotDifference, targetPos.z);
+        }
+
         Vector3 startPos = transform.position;
         Quaternion startRot = transform.rotation;
 
@@ -41,7 +54,7 @@ public class AttatchObject : MonoBehaviour
             float t = timeElapsed / duration;
 
             // Interpolate position and rotation
-            transform.position = Vector3.Lerp(startPos, targetPos, t);
+            transform.position = Vector3.Lerp(startPos, newTarget, t);
             transform.rotation = Quaternion.Slerp(startRot, targetRot, t);
 
             timeElapsed += Time.deltaTime;
@@ -51,6 +64,7 @@ public class AttatchObject : MonoBehaviour
         // Snap to final position/rotation
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+        
 
         isLerping = false;
     }
@@ -62,6 +76,8 @@ public class AttatchObject : MonoBehaviour
         {
             Debug.Log(col.gameObject.name);
             targetTransform = col.transform;
+            StopAllCoroutines();
+            StartLerp();
         }
     }
 }
