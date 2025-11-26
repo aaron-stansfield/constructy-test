@@ -16,7 +16,7 @@ public class tapeScrip : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -46,6 +46,8 @@ public class tapeScrip : MonoBehaviour
                 GameObject lastTicket = currentTicketSection;
                 currentTicketSection = Instantiate(realTicket,this.transform);
                 
+                currentTicketSection.GetComponent<AudioSource>().Play();
+
                 currentTicketSection.transform.localScale = new Vector3(0.69359f, 0.69359f, 0.69359f);
 
                 currentTicketSection.transform.GetChild(0).GetComponent<Renderer>().material.color = 

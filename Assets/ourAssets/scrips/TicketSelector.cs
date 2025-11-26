@@ -10,6 +10,9 @@ public class TicketSelector : MonoBehaviour
 
     [SerializeField] private XRInputValueReader<float> m_LeftGripInput = new XRInputValueReader<float>("Grip");
 
+
+    private AudioSource sound;
+
     [SerializeField] CriticalOption dialScip;
 
     //newnewnew
@@ -31,6 +34,7 @@ public class TicketSelector : MonoBehaviour
 
     private void Start()
     {
+        sound = GetComponent<AudioSource>();
         baseRotation = cylinder.localRotation;
         currentRotation = 0f;
     }
@@ -61,6 +65,9 @@ public class TicketSelector : MonoBehaviour
         {
             float targetRotation = currentIndex * rotationPerTicket;
             currentRotation = Mathf.Lerp(currentRotation, targetRotation, Time.deltaTime * snapSpeed);
+
+            sound.Play();
+
             cylinder.localRotation = baseRotation * Quaternion.Euler(0f, currentRotation, 0f);
         }
     }
