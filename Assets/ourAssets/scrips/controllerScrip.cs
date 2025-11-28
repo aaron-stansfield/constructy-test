@@ -57,9 +57,9 @@ public class controllerScrip : MonoBehaviour
     {
         foreach (Collider col in Physics.OverlapSphere(rightController.transform.position, rightController.GetComponent<SphereCollider>().radius))
         {
-            if (col.GetComponent<buttonInteraction>() == null) return;
+            if (col.GetComponent<buttonInterface>() == null) return;
 
-            col.GetComponent<buttonInteraction>().interact();
+            col.GetComponent<buttonInterface>().interactWithButton();
         }
     }
 

@@ -10,7 +10,6 @@ public class gamerManage : MonoBehaviour
 
     [SerializeField] TMP_Text reportText;
 
-    [SerializeField] clipboardScrip clipboard;
     [SerializeField] GameObject[] situations;
 
     public Hashtable reports = new Hashtable();
@@ -18,7 +17,7 @@ public class gamerManage : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        finished();
     }
 
     // Update is called once per frame
@@ -65,9 +64,7 @@ public class gamerManage : MonoBehaviour
         //total score out of total number of scenarios
         reportText.text += ($"Final Score = {runningTotal}/{reports.Count * 2}");
 
-        //displays the report
-        clipboard.openReportPage();
-        
+
 
     }
 

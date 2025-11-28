@@ -4,27 +4,29 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using MEC;
 
-public class buttonInteraction : MonoBehaviour
+public class slideChangeButton : MonoBehaviour, buttonInterface
 {
 
     [SerializeField] GameObject[] whiteboardState;
 
     [SerializeField] int index;
 
-     private bool buttonReady = true;
+    private bool buttonReady = true;
 
 
-    public void interact()
+    public void interactWithButton()
     {
         if (!buttonReady) return;
 
         buttonReady = false;
         whiteboardState[index].gameObject.SetActive(false);
 
-        if (index < whiteboardState.Length - 1){
+        if (index < whiteboardState.Length - 1)
+        {
             index++;
         }
-        else{
+        else
+        {
             index = 0;
         }
 
@@ -33,5 +35,5 @@ public class buttonInteraction : MonoBehaviour
         Timing.CallDelayed(1f, () => buttonReady = true);
     }
 
-    
+
 }
