@@ -7,6 +7,8 @@ using MEC;
 public class finishButton : MonoBehaviour, buttonInterface
 {
 
+    [SerializeField] GameObject gamemanager;
+
     private bool buttonReady = true;
 
 
@@ -16,7 +18,7 @@ public class finishButton : MonoBehaviour, buttonInterface
 
         buttonReady = false;
 
-
+        gamemanager.GetComponent<gamerManage>().finished();
 
         Timing.CallDelayed(1f, () => buttonReady = true);
     }

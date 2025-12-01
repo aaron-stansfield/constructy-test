@@ -30,26 +30,27 @@ public class situationScrip : MonoBehaviour
 
         foreach (Collider col in Physics.OverlapSphere(this.transform.position, checkRadius, ticketLayer))
         {
-            fixIcons.transform.GetChild(0).gameObject.SetActive(true);
+            fixIcons.SetActive(true);
+            return;
             
         }
         foreach (Collider col in Physics.OverlapSphere(this.transform.position, checkRadius, fixLayer))
         {
-            if (!fixIcons.transform.GetChild(0).gameObject.activeInHierarchy)
-            {
-                fixIcons.transform.GetChild(0).gameObject.SetActive(true);
+            //if (!fixIcons.transform.GetChild(0).gameObject.activeInHierarchy)
+            //{
+                fixIcons.SetActive(true);
                 
-            }
+            //}
 
-            else
-            {
-                fixIcons.transform.GetChild(0).gameObject.SetActive(false);
-                fixIcons.transform.GetChild(1).gameObject.SetActive(true);
-            }
+            //else
+            //{
+            //    fixIcons.transform.GetChild(0).gameObject.SetActive(false);
+            //    fixIcons.transform.GetChild(1).gameObject.SetActive(true);
+            //}
             return;
         }
-        fixIcons.transform.GetChild(0).gameObject.SetActive(false);
-        fixIcons.transform.GetChild(1).gameObject.SetActive(false);
+        fixIcons.SetActive(false);
+        //fixIcons.transform.GetChild(1).gameObject.SetActive(false);
     }
 
 
