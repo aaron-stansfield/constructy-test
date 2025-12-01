@@ -16,7 +16,7 @@ public class situationScrip : MonoBehaviour
     [SerializeField] LayerMask ticketLayer;
     [SerializeField] LayerMask fixLayer;
 
-    [SerializeField] GameObject fixIcon;
+    [SerializeField] GameObject fixIcons;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,16 +30,26 @@ public class situationScrip : MonoBehaviour
 
         foreach (Collider col in Physics.OverlapSphere(this.transform.position, checkRadius, ticketLayer))
         {
-            fixIcon.SetActive(true);
-            return;
+            fixIcons.transform.GetChild(0).gameObject.SetActive(true);
+            
         }
         foreach (Collider col in Physics.OverlapSphere(this.transform.position, checkRadius, fixLayer))
         {
+            if (!fixIcons.transform.GetChild(0).gameObject.activeInHierarchy)
+            {
+                fixIcons.transform.GetChild(0).gameObject.SetActive(true);
+                
+            }
 
-            fixIcon.SetActive(true);
+            else
+            {
+                fixIcons.transform.GetChild(0).gameObject.SetActive(false);
+                fixIcons.transform.GetChild(1).gameObject.SetActive(true);
+            }
             return;
         }
-        fixIcon.SetActive(false);
+        fixIcons.transform.GetChild(0).gameObject.SetActive(false);
+        fixIcons.transform.GetChild(1).gameObject.SetActive(false);
     }
 
 
