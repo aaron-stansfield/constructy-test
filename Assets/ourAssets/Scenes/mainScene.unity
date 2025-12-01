@@ -14420,7 +14420,6 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7492b3baf31d8e44b35e3e63295539a, type: 2}
   - {fileID: 2100000, guid: dc29876a142ea9c41805807a6366a29a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -63187,7 +63186,6 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7492b3baf31d8e44b35e3e63295539a, type: 2}
   - {fileID: 2100000, guid: dc29876a142ea9c41805807a6366a29a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -103856,7 +103854,7 @@ Transform:
   m_GameObject: {fileID: 1598269138}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.338356, y: 3.4257092, z: 9.685558}
+  m_LocalPosition: {x: 9.3, y: 3.4257092, z: 4.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -103877,7 +103875,7 @@ ReflectionProbe:
   m_TimeSlicingMode: 0
   m_Resolution: 256
   m_UpdateFrequency: 0
-  m_BoxSize: {x: 37.395325, y: 15.0754175, z: 36.365585}
+  m_BoxSize: {x: 56.3, y: 15.0754175, z: 53.8}
   m_BoxOffset: {x: 0, y: 0, z: 0}
   m_NearClip: 0.3
   m_FarClip: 1000
@@ -103926,7 +103924,7 @@ MonoBehaviour:
       rangeCompressionFactor: 1
     influence:
       m_Shape: 0
-      m_BoxSize: {x: 37.395325, y: 15.0754175, z: 36.365585}
+      m_BoxSize: {x: 56.3, y: 15.0754175, z: 53.8}
       m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
       m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 1}
       m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}

@@ -57,7 +57,11 @@ Material:
         m_Offset: {x: 0.15, y: 0}
     m_Ints: []
     m_Floats:
+    - _CoatMask: 1
     - _InvTilingScale: 3.3333333
+    - _Metallic: 1
+    - _NormalScale: 4.04
+    - _Smoothness: 0
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
