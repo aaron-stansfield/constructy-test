@@ -133,7 +133,7 @@ public class GunScrip : MonoBehaviour
             {
                 var renderer = tempHeldTicket.transform.GetChild(0).GetChild(0).GetComponent<Renderer>();
                 if (renderer != null)
-                    renderer.material.color = criticalOption.GetCurrentColor();
+                    renderer.material = criticalOption.GetCurrentColor();
             }
             if (ticketSelector != null)
             {

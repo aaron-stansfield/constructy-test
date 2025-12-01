@@ -48,8 +48,8 @@ public class tapeScrip : MonoBehaviour
                 
                 currentTicketSection.transform.localScale = new Vector3(0.69359f, 0.69359f, 0.69359f);
 
-                currentTicketSection.transform.GetChild(0).GetComponent<Renderer>().material.color = 
-                    lastTicket.transform.GetChild(0).GetComponent<Renderer>().material.color;
+                currentTicketSection.transform.GetChild(0).GetComponent<Renderer>().material = 
+                    lastTicket.transform.GetChild(0).GetComponent<Renderer>().material;
 
                 currentTicketSection.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>().text =
                     lastTicket.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>().text;

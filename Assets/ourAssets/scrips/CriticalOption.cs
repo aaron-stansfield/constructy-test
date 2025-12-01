@@ -20,6 +20,8 @@ public class CriticalOption : MonoBehaviour
 
     private Quaternion baseRotation;
 
+    [SerializeField] private Material color1, color2;
+
     //new
     [SerializeField] private Renderer[] cubeRenderers;
 
@@ -59,23 +61,23 @@ public class CriticalOption : MonoBehaviour
         if (isRotated)
         {
             cylinder.localRotation = baseRotation * Quaternion.Euler(0f, rotation, 0f);
-            SetAllCubeColors(Color.red); 
+            SetAllCubeColors(color2); 
         }
         else
         {
             cylinder.localRotation = baseRotation;
-            SetAllCubeColors(Color.yellow); 
+            SetAllCubeColors(color1); 
         }
     }
 
-    private void SetAllCubeColors(Color color)
+    private void SetAllCubeColors(Material mat)
     {
         if (cubeRenderers == null || cubeRenderers.Length == 0) return;
 
         foreach (Renderer r in cubeRenderers)
         {
             if (r != null)
-                r.material.color = color;
+                r.material = mat;
         }
     }
 
@@ -91,8 +93,8 @@ public class CriticalOption : MonoBehaviour
         // can add later if wanted
     }
 
-    public Color GetCurrentColor()
+    public Material GetCurrentColor()
     {
-        return isRotated ? Color.red : Color.yellow;
+        return isRotated ? color2 : color1;
     }
 }
