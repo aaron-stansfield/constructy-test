@@ -31,7 +31,7 @@ public class slideChangeButton : MonoBehaviour, buttonInterface
         }
 
         whiteboardState[index].gameObject.SetActive(true);
-
+        tutorialDoor.instance.slidesWatched = true;
         Timing.CallDelayed(1f, () => buttonReady = true);
     }
 
