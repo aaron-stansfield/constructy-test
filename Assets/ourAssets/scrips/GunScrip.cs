@@ -23,10 +23,11 @@ public class GunScrip : MonoBehaviour
     [SerializeField] private LayerMask fixLayer;
     [SerializeField] private LayerMask fixAndTicketLayer;
     [SerializeField] Transform ticketTransformGun;
-
-
-    //newnewnew
     [SerializeField] private Renderer[] gunRenderers;
+
+    //newww
+    [SerializeField] private SpriteRenderer gunIconRenderer;
+    [SerializeField] private Sprite[] hazardIcons;
 
     private string[] ticketTags = new string[]
     {
@@ -127,8 +128,8 @@ public class GunScrip : MonoBehaviour
             tempHeldTicket.transform.localPosition = Vector3.zero;
 
             heldItem = tempHeldTicket;
-            
-        
+
+
             if (criticalOption != null)
             {
                 var renderer = tempHeldTicket.transform.GetChild(0).GetChild(0).GetComponent<Renderer>();
@@ -138,7 +139,7 @@ public class GunScrip : MonoBehaviour
             if (ticketSelector != null)
             {
                 int index = ticketSelector.GetCurrentIndex();
-                string[] hazardNames = {"VIBRATION", "NOISE", "DUST", "GOOD", "MANUAL HANDLING", "CHEMICALS/FUMES" };
+                string[] hazardNames = { "VIBRATION", "NOISE", "DUST", "GOOD", "MANUAL HANDLING", "CHEMICALS/FUMES" };
                 string selectedHazard = hazardNames[index % hazardNames.Length];
 
                 tempHeldTicket.name = "Ticket_" + selectedHazard;
@@ -147,7 +148,7 @@ public class GunScrip : MonoBehaviour
                 if (label != null)
                     label.text = selectedHazard;
             }
-            if(gun.activeSelf) tempHeldTicket.transform.SetParent(null);
+            if (gun.activeSelf) tempHeldTicket.transform.SetParent(null);
 
             try
             {
@@ -207,6 +208,13 @@ public class GunScrip : MonoBehaviour
             if (r != null)
                 r.material.color = targetColor;
         }
+
+        //newwww
+        if (gunIconRenderer != null && hazardIcons != null && hazardIcons.Length > index)
+        {
+            gunIconRenderer.sprite = hazardIcons[index];
+        }
+
     }
 
     private void OnDestroy()
@@ -217,3 +225,4 @@ public class GunScrip : MonoBehaviour
 
 
 }
+
