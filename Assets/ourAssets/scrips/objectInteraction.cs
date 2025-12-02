@@ -5,7 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit.Inputs.Readers;
 public class objectInteraction : MonoBehaviour, interactionInterface
 {
 
-
+    public bool held = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -28,6 +28,7 @@ public class objectInteraction : MonoBehaviour, interactionInterface
 
         Debug.Log("shleeb");
 
+        held = true;
 
         this.GetComponent<Rigidbody>().isKinematic = true;
 
@@ -44,10 +45,13 @@ public class objectInteraction : MonoBehaviour, interactionInterface
 
         this.transform.SetParent(null);
 
+        held = false;
+
         foreach (Collider col in Physics.OverlapSphere(this.transform.position, 0.01f))
         {
             if (col.CompareTag("AttatchArea") && this.gameObject.GetComponent<AttatchObject>() != null)
             {
+                this.gameObject.transform.GetComponent<AttatchObject>().targetTransform = col.transform;
                 this.gameObject.transform.GetComponent<AttatchObject>().StartLerp();
                 this.transform.SetParent(col.gameObject.transform);                //inHazard = true;
                 break;

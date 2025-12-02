@@ -9,6 +9,8 @@ public class AttatchObject : MonoBehaviour
     public bool hasPivot;
     public float pivotDifference;
 
+    public objectInteraction interactScript;
+
 
     private bool isLerping = false;
 
@@ -70,7 +72,7 @@ public class AttatchObject : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider col)
+    /*private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("AttatchArea"))
         {
@@ -79,5 +81,5 @@ public class AttatchObject : MonoBehaviour
             StopAllCoroutines();
             StartLerp();
         }
-    }
+    }*/
 }

@@ -4,7 +4,7 @@ public class hatScript : MonoBehaviour
 {
     private void Update()
     {
-        if(this.transform.childCount > 0)
+        if(this.transform.parent.childCount > 0 && this.transform.parent.CompareTag("AttatchArea"))
         {
             tutorialDoor.instance.hatOn = true;
             GetComponent<hatScript>().enabled = false;

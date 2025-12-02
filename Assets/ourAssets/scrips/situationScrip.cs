@@ -59,30 +59,20 @@ public class situationScrip : MonoBehaviour
         idCheck = false;
         fixCheck = false;
         foreach (Collider col in Physics.OverlapSphere(this.transform.position, checkRadius, ticketLayer)){
-            if (!col.transform.CompareTag(expectedTicket))
-            {
-
-                idCheck = false;
-                break;
-            }
-            else
+            if (col.transform.CompareTag(expectedTicket) && idCheck == false)
             {
 
                 idCheck = true;
+                break;
             }
         }
 
         foreach (Collider col in Physics.OverlapSphere(this.transform.position, checkRadius, fixLayer))
         {
-            if (!col.transform.CompareTag(expectedFix))
+            if (col.transform.CompareTag(expectedFix) && fixCheck == false)
             {
-                fixCheck = false;
-                break;
-            }
-            else
-            {
-
                 fixCheck = true;
+                break;
             }
         }
 

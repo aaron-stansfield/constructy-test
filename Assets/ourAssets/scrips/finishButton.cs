@@ -8,8 +8,9 @@ public class finishButton : MonoBehaviour, buttonInterface
 {
 
     [SerializeField] GameObject gamemanager;
+    [SerializeField] GameObject restartButton;
 
-    private bool buttonReady = true;
+    [SerializeField] private bool buttonReady = true;
 
 
     public void interactWithButton()
@@ -19,6 +20,9 @@ public class finishButton : MonoBehaviour, buttonInterface
         buttonReady = false;
 
         gamemanager.GetComponent<gamerManage>().finished();
+
+        restartButton.SetActive(true);
+        this.gameObject.transform.parent.gameObject.SetActive(false);
 
         Timing.CallDelayed(1f, () => buttonReady = true);
     }
