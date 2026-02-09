@@ -8,6 +8,7 @@ using UnityEngine.Rendering.HighDefinition;
 
 public class gamerManage : MonoBehaviour
 {
+    public static gamerManage Instance = null;
 
     [SerializeField] TMP_Text reportText;
 
@@ -20,7 +21,12 @@ public class gamerManage : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //finished();
+        if (Instance == null)
+            Instance = this;
+        else
+        {
+            DestroyImmediate(this);
+        }
     }
 
     // Update is called once per frame
