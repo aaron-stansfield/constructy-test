@@ -32814,7 +32814,7 @@ GameObject:
   - component: {fileID: 417257244}
   - component: {fileID: 417257246}
   - component: {fileID: 417257245}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Chemicals/Fumes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41354,7 +41354,7 @@ GameObject:
   - component: {fileID: 534334801}
   - component: {fileID: 534334803}
   - component: {fileID: 534334802}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Noise
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45761,7 +45761,7 @@ GameObject:
   - component: {fileID: 678406794}
   - component: {fileID: 678406796}
   - component: {fileID: 678406795}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Manual Handling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107862,7 +107862,7 @@ GameObject:
   - component: {fileID: 1519352249}
   - component: {fileID: 1519352251}
   - component: {fileID: 1519352250}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vibration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117313,7 +117313,7 @@ GameObject:
   - component: {fileID: 1647399982}
   - component: {fileID: 1647399984}
   - component: {fileID: 1647399983}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122137,7 +122137,7 @@ GameObject:
   - component: {fileID: 1778867195}
   - component: {fileID: 1778867197}
   - component: {fileID: 1778867196}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Good
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136695,7 +136695,7 @@ GameObject:
   - component: {fileID: 2058466852}
   - component: {fileID: 2058466853}
   - component: {fileID: 2058466854}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TicketSelector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136756,6 +136756,16 @@ MonoBehaviour:
   gripReady: 1
   TopBoxCollider: {fileID: 2024303335}
   BottomBoxCollider: {fileID: 183469271}
+  gripLatchThreshold: 0.6
+  gripReleaseThreshold: 0.3
+  twistStepDegrees: 30
+  stepCooldown: 0.12
+  highlightRenderers:
+  - {fileID: 8609809773246535269}
+  - {fileID: 1170970069318450404}
+  - {fileID: 4958033386308864142}
+  highlightEmission: 1
+  smoothSnapStopThreshold: 1
 --- !u!82 &2058466854
 AudioSource:
   m_ObjectHideFlags: 0
@@ -148907,7 +148917,7 @@ GameObject:
   - component: {fileID: 6144080331898268459}
   - component: {fileID: 6144080331898268458}
   - component: {fileID: 6144080331898268460}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCylinder4
   m_TagString: Untagged
   m_Icon: {fileID: 0}

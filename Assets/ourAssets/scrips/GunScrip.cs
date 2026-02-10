@@ -6,14 +6,10 @@ using UnityEngine.Animations.Rigging;
 using UnityEngine.XR.Interaction.Toolkit.Inputs.Readers;
 public class GunScrip : MonoBehaviour
 {
-
     [SerializeField] XRInputValueReader<float> m_RightGripInput = new XRInputValueReader<float>("Grip");
-
-
     [SerializeField] XRInputValueReader<float> m_TriggerInput = new XRInputValueReader<float>("Trigger");
 
     [SerializeField] GameObject controllerVisual;
-
     [SerializeField] GameObject rightController;
 
     [SerializeField] private GameObject gun;
@@ -23,7 +19,6 @@ public class GunScrip : MonoBehaviour
     [SerializeField] private LayerMask fixLayer;
     [SerializeField] private LayerMask fixAndTicketLayer;
     [SerializeField] Transform ticketTransformGun;
-
 
     //newnewnew
     [SerializeField] private Renderer[] gunRenderers;
@@ -38,13 +33,8 @@ public class GunScrip : MonoBehaviour
         "chemical"
     };
 
-    private GameObject currentDude;
-
     [SerializeField] private TicketSelector ticketSelector;
     [SerializeField] private CriticalOption criticalOption;
-
-
-    private bool triggerHeld;
 
     private bool TriggerInputReady = true;
     public GameObject heldItem = null;
@@ -57,9 +47,8 @@ public class GunScrip : MonoBehaviour
         if (ticketSelector != null)
         {
             ticketSelector.OnTicketChanged += UpdateGunColor;
-            UpdateGunColor(ticketSelector.GetCurrentIndex()); // set initial colour
+            UpdateGunColor(ticketSelector.GetCurrentIndex());
         }
-
     }
 
     void Update()
@@ -72,28 +61,21 @@ public class GunScrip : MonoBehaviour
             }
             if (m_RightGripInput.ReadValue() > 0.8f)
             {
-
-                foreach (Collider col in Physics.OverlapSphere(rightController.transform.position, ticketTransformGun.GetComponent<SphereCollider>().radius, ticketLayer))
+                foreach (Collider col in Physics.OverlapSphere(
+                    rightController.transform.position,
+                    ticketTransformGun.GetComponent<SphereCollider>().radius,
+                    ticketLayer))
                 {
                     if (col.gameObject.GetComponent<interactionInterface>() == null) return;
-
-                    Debug.Log("gleep");
                     Destroy(col.gameObject);
-
                     break;
                 }
-
             }
-
         }
-        else if (heldItem != null)
+        else if (m_TriggerInput.ReadValue() < 0.2f)
         {
-            if (m_TriggerInput.ReadValue() < 0.2f)
-            {
-                stopTicketing();
-            }
+            stopTicketing();
         }
-
     }
 
     public void stopTicketing()
@@ -102,16 +84,9 @@ public class GunScrip : MonoBehaviour
         {
             heldItem.GetComponent<tapeScrip>().stopDispensing();
         }
-        catch
-        {
-            Debug.Log("blop");
-        }
-
-
-        //heldItem.transform.SetParent(null);
+        catch { }
 
         heldItem = null;
-
         TriggerInputReady = true;
     }
 
@@ -121,58 +96,45 @@ public class GunScrip : MonoBehaviour
         {
             TriggerInputReady = false;
 
-            //taken and slightly changed from clipboard script
             GameObject tempHeldTicket = Instantiate(ticketPrefab);
             tempHeldTicket.transform.SetParent(ticketTransformGun);
             tempHeldTicket.transform.localPosition = Vector3.zero;
 
             heldItem = tempHeldTicket;
-            
-        
+
             if (criticalOption != null)
             {
                 var renderer = tempHeldTicket.transform.GetChild(0).GetChild(0).GetComponent<Renderer>();
                 if (renderer != null)
                     renderer.material.color = criticalOption.GetCurrentColor();
             }
+
             if (ticketSelector != null)
             {
                 int index = ticketSelector.GetCurrentIndex();
-                string[] hazardNames = {"VIBRATION", "NOISE", "DUST", "GOOD", "MANUAL HANDLING", "CHEMICALS/FUMES" };
-                string selectedHazard = hazardNames[index % hazardNames.Length];
+                string[] hazardNames = {
+                    "VIBRATION", "NOISE", "DUST",
+                    "GOOD", "MANUAL HANDLING", "CHEMICALS/FUMES"
+                };
+                tempHeldTicket.name = "Ticket_" + hazardNames[index];
+                tempHeldTicket.tag = ticketTags[index];
 
-                tempHeldTicket.name = "Ticket_" + selectedHazard;
-                tempHeldTicket.tag = (string)ticketTags[index];
                 TMP_Text label = tempHeldTicket.GetComponentInChildren<TMP_Text>();
                 if (label != null)
-                    label.text = selectedHazard;
+                    label.text = hazardNames[index];
             }
-            if(gun.activeSelf) tempHeldTicket.transform.SetParent(null);
+
+            tempHeldTicket.transform.SetParent(null);
 
             try
             {
-                tempHeldTicket.GetComponent<tapeScrip>().startDispensing(ticketTransformGun, tempHeldTicket);
+                tempHeldTicket.GetComponent<tapeScrip>()
+                    .startDispensing(ticketTransformGun, tempHeldTicket);
             }
-            catch (NullReferenceException)
-            {
-                Debug.Log("no component headass");
-            }
-
+            catch { }
         }
-
-        //if(m_RightGripInput.ReadValue() > 0.7f && heldItem != null && !gun.activeSelf)
-        //{
-        //    heldItem.transform.SetParent(ticketTransform);
-        //    heldItem.transform.localPosition = Vector3.zero;
-        //    heldItem.transform.localRotation = new Quaternion(0, 0, 0, 0);
-        //    Debug.Log(rightController.GetComponent<Rigidbody>().angularVelocity);
-
-        //}
-
-
     }
 
-    //newnewnew
     private void UpdateGunColor(int index)
     {
         if (gunRenderers == null || gunRenderers.Length == 0) return;
@@ -181,27 +143,14 @@ public class GunScrip : MonoBehaviour
 
         switch (index)
         {
-            case 0: //vibration
-                targetColor = Color.red;
-                break;
-            case 1: //noise
-                targetColor = new Color(0.5f, 0f, 0.5f); // purple
-                break;
-            case 2: //dust
-                targetColor = new Color(1f, 0.5f, 0f); // orange
-                break;
-            case 3: //good
-                targetColor = Color.green;
-                break;
-            case 4: //manual handling
-                targetColor = Color.blue;
-                break;
-            case 5: //chemicals/fumes
-                targetColor = Color.yellow;
-                break;
+            case 0: targetColor = Color.red; break;
+            case 1: targetColor = new Color(0.5f, 0f, 0.5f); break;
+            case 2: targetColor = new Color(1f, 0.5f, 0f); break;
+            case 3: targetColor = Color.green; break;
+            case 4: targetColor = Color.blue; break;
+            case 5: targetColor = Color.yellow; break;
         }
 
-        //made into an array because gun object has 3 3d objects
         foreach (Renderer r in gunRenderers)
         {
             if (r != null)
@@ -214,6 +163,4 @@ public class GunScrip : MonoBehaviour
         if (ticketSelector != null)
             ticketSelector.OnTicketChanged -= UpdateGunColor;
     }
-
-
 }

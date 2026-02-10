@@ -10,15 +10,14 @@ public class TicketSelector : MonoBehaviour
 
     [SerializeField] private XRInputValueReader<float> m_LeftGripInput = new XRInputValueReader<float>("Grip");
 
-
     private AudioSource sound;
 
     [SerializeField] CriticalOption dialScip;
 
     //newnewnew
-    [SerializeField] private float rotationPerTicket = 60f; 
+    [SerializeField] private float rotationPerTicket = 60f;
     [SerializeField] private float scrollSensitivity = 5f;
-    [SerializeField] private float snapSpeed = 10f; 
+    [SerializeField] private float snapSpeed = 10f;
 
     public bool gripReady = true;
     private float currentRotation = 0f; // continuous rotation value
@@ -32,6 +31,16 @@ public class TicketSelector : MonoBehaviour
     public delegate void TicketChangedEvent(int newIndex);
     public event TicketChangedEvent OnTicketChanged;
 
+    //newwww
+    [SerializeField] private float gripLatchThreshold = 0.6f;
+    [SerializeField] private float gripReleaseThreshold = 0.3f;
+    [SerializeField] private float twistStepDegrees = 30f;
+    [SerializeField] private float stepCooldown = 0.12f;
+
+    private bool isLatched;
+    private Quaternion latchControllerRotation;
+    private bool stepOnCooldown;
+
     private void Start()
     {
         sound = GetComponent<AudioSource>();
@@ -41,35 +50,82 @@ public class TicketSelector : MonoBehaviour
 
     private void Update()
     {
-        HandleScroll();
+        HandleLatchTwist();
     }
 
-    private void HandleScroll()
+    //replaces old up/down scrolling with latch and wristtwist snap
+    private void HandleLatchTwist()
     {
-        if (!IsControllerNearCylinder()) return;
-        float controllerY = leftController.transform.position.y;
-        float deltaY = controllerY * scrollSensitivity * Time.deltaTime;
+        bool near = IsControllerNearCylinder();
+        float grip = m_LeftGripInput.ReadValue();
+        bool dialAllows = (dialScip == null) || dialScip.gripReady;
 
-        currentRotation += deltaY;
+        if (!isLatched)
+        {
+            if (near && dialAllows && gripReady && grip > gripLatchThreshold)
+            {
+                isLatched = true;
+                latchControllerRotation = leftController.transform.rotation;
+            }
+            return;
+        }
+
+        if (!near || grip < gripReleaseThreshold)
+        {
+            isLatched = false;
+            return;
+        }
+
+        if (stepOnCooldown) return;
+
+        Quaternion currentRot = leftController.transform.rotation;
+        Quaternion delta = Quaternion.Inverse(latchControllerRotation) * currentRot;
+
+        delta.ToAngleAxis(out float angle, out Vector3 axis);
+        if (angle > 180f) angle -= 360f;
+
+        float sign = Mathf.Sign(Vector3.Dot(axis, leftController.transform.forward));
+        float signedAngle = angle * sign;
+
+        if (signedAngle >= twistStepDegrees)
+        {
+            StepIndex(+1);
+            latchControllerRotation = currentRot;
+            StartCoroutine(StepCooldown());
+        }
+        else if (signedAngle <= -twistStepDegrees)
+        {
+            StepIndex(-1);
+            latchControllerRotation = currentRot;
+            StartCoroutine(StepCooldown());
+        }
+    }
+
+    //snap with event and should play sound
+    private void StepIndex(int delta)
+    {
+        int newIndex = (currentIndex + delta) % 6;
+        if (newIndex < 0) newIndex += 6;
+
+        if (newIndex == currentIndex) return;
+
+        currentIndex = newIndex;
+        OnTicketChanged?.Invoke(currentIndex);
+
+        currentRotation = currentIndex * rotationPerTicket;
         cylinder.localRotation = baseRotation * Quaternion.Euler(0f, currentRotation, 0f);
 
-        int newIndex = Mathf.RoundToInt(currentRotation / rotationPerTicket) % 6;
-        if (newIndex < 0) newIndex += 6; 
-        if (newIndex != currentIndex)
-        {
-            currentIndex = newIndex;
-            OnTicketChanged?.Invoke(currentIndex);
-        }
+        if (sound != null) sound.Play();
+    }
 
-        if (Mathf.Abs(deltaY) < 0.001f)
-        {
-            float targetRotation = currentIndex * rotationPerTicket;
-            currentRotation = Mathf.Lerp(currentRotation, targetRotation, Time.deltaTime * snapSpeed);
-
-            sound.Play();
-
-            cylinder.localRotation = baseRotation * Quaternion.Euler(0f, currentRotation, 0f);
-        }
+    //cooldown to prevent wthe weird continuous spinning
+    private IEnumerator StepCooldown()
+    {
+        stepOnCooldown = true;
+        gripReady = false;
+        yield return new WaitForSeconds(stepCooldown);
+        gripReady = true;
+        stepOnCooldown = false;
     }
 
     private bool IsControllerNearCylinder()

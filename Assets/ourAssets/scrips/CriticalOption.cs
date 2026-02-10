@@ -12,7 +12,7 @@ public class CriticalOption : MonoBehaviour
 
     [SerializeField] TicketSelector selectorScrip;
 
-    [SerializeField] private float rotation = 90f; 
+    [SerializeField] private float rotation = 90f;
     [SerializeField] private float coolDown = 0.3f;
 
     public bool gripReady = true;
@@ -33,7 +33,6 @@ public class CriticalOption : MonoBehaviour
         if (m_LeftGripInput.ReadValue() > 0.5f && gripReady && IsControllerNearCylinder() && selectorScrip.gripReady)
         {
             Rotating();
-
             StartCoroutine(GripCooldown());
         }
     }
@@ -59,12 +58,12 @@ public class CriticalOption : MonoBehaviour
         if (isRotated)
         {
             cylinder.localRotation = baseRotation * Quaternion.Euler(0f, rotation, 0f);
-            SetAllCubeColors(Color.red); 
+            SetAllCubeColors(Color.red);
         }
         else
         {
             cylinder.localRotation = baseRotation;
-            SetAllCubeColors(Color.yellow); 
+            SetAllCubeColors(Color.yellow);
         }
     }
 
