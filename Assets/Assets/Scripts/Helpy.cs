@@ -8,6 +8,10 @@ namespace Assets.Assets.Scripts
 {
     public static class Helpy
     {
+        /// <summary>
+        /// peak
+        /// </summary>
+
         public static IEnumerable<T> PickRandom<T>(this IEnumerable<T> list, int count)
         {
             return list.OrderBy(x => Guid.NewGuid()).Take(count);

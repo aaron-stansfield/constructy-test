@@ -16,12 +16,22 @@ public class DynamicSpawningSystems : MonoBehaviour
     public GameObject locationParent;
 
     [Header("prefabs by category")]
-    public Dictionary<Category, List<GameObject>> scenarios =
+    public List<GameObject> goodScenarios = new List<GameObject>();
+    public List<GameObject> badScenarios = new List<GameObject>();
+    public List<GameObject> mehScenarios = new List<GameObject>();
+
+    private Dictionary<Category, List<GameObject>> scenarios =
         new Dictionary<Category, List<GameObject>>();
 
     [Header("spawned ones")]
     public List<GameObject> ActiveScenarios = new List<GameObject>();
 
+    public void Start()
+    {
+        scenarios.Add(Category.good, goodScenarios);
+        scenarios.Add(Category.bad, badScenarios);
+        scenarios.Add(Category.meh, mehScenarios);
+    }
 
     public void GenerateScenarios()
     {
