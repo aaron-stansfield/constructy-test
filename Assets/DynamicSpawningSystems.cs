@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Assets.ourAssets.scrips;
+using Assets.Assets.Scripts;
 using UnityEngine;
 
 public class DynamicSpawningSystems : MonoBehaviour
@@ -36,11 +36,11 @@ public class DynamicSpawningSystems : MonoBehaviour
                 .Cast<Category>()
                 .PickRandom();
 
-            GameObject flarb = scenarios[thingType].PickRandom();
-            if (flarb == null)
+            GameObject randomScenario = scenarios[thingType].PickRandom();
+            if (randomScenario == null)
                 continue;
 
-            GameObject i = Instantiate(flarb, t.position, t.rotation, t);
+            GameObject i = Instantiate(randomScenario, t.position, t.rotation, t);
 
             ActiveScenarios.Add(i);
         }
