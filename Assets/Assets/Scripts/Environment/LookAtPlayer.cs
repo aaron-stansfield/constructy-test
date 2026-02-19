@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class LookAtPlayer : MonoBehaviour
 {
-    [SerializeField]
     Transform player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        player = Camera.main.transform;       
     }
 
     // Update is called once per frame
@@ -21,4 +20,5 @@ public class LookAtPlayer : MonoBehaviour
         this.transform.LookAt(player.position);
         
     }
+
 }

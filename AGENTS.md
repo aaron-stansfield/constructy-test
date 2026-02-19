@@ -2,7 +2,7 @@
 - Project name: constructy test
 - Unity version: Unity 6000.0.55f1
 - Active game object:
-  - Name: walls
+  - Name: lomgic n collider
   - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
