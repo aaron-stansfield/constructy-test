@@ -27,7 +27,7 @@ public class GunScript : MonoBehaviour
         "trippingHazard",
         "noPPE",
         "other",
-        "good",
+        "lifting",
         "chemical"
     };
 
