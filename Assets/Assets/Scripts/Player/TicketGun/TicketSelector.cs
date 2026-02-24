@@ -14,7 +14,6 @@ public class TicketSelector : MonoBehaviour
 
     [SerializeField] CriticalOption dialScip;
 
-    //newnewnew
     [SerializeField] private float rotationPerTicket = 60f;
     [SerializeField] private float scrollSensitivity = 5f;
     [SerializeField] private float snapSpeed = 10f;
@@ -31,7 +30,6 @@ public class TicketSelector : MonoBehaviour
     public delegate void TicketChangedEvent(int newIndex);
     public event TicketChangedEvent OnTicketChanged;
 
-    //newwww
     [SerializeField] private float gripLatchThreshold = 0.6f;
     [SerializeField] private float gripReleaseThreshold = 0.3f;
     [SerializeField] private float twistStepDegrees = 30f;
@@ -40,6 +38,9 @@ public class TicketSelector : MonoBehaviour
     private bool isLatched;
     private Quaternion latchControllerRotation;
     private bool stepOnCooldown;
+
+    //new 24/2
+    private float latchStartRotation = 0f;
 
     private void Start()
     {
@@ -66,6 +67,9 @@ public class TicketSelector : MonoBehaviour
             {
                 isLatched = true;
                 latchControllerRotation = leftController.transform.rotation;
+
+                //new 24/2
+                latchStartRotation = currentRotation;
             }
             return;
         }
@@ -73,10 +77,14 @@ public class TicketSelector : MonoBehaviour
         if (!near || grip < gripReleaseThreshold)
         {
             isLatched = false;
+
+            SnapToNearestIndex();
             return;
         }
 
-        if (stepOnCooldown) return;
+
+
+        //if (stepOnCooldown) return;
 
         Quaternion currentRot = leftController.transform.rotation;
         Quaternion delta = Quaternion.Inverse(latchControllerRotation) * currentRot;
@@ -84,21 +92,14 @@ public class TicketSelector : MonoBehaviour
         delta.ToAngleAxis(out float angle, out Vector3 axis);
         if (angle > 180f) angle -= 360f;
 
-        float sign = Mathf.Sign(Vector3.Dot(axis, leftController.transform.forward));
+        float sign = Mathf.Sign(Vector3.Dot(axis, cylinder.up));
         float signedAngle = angle * sign;
 
-        if (signedAngle >= twistStepDegrees)
-        {
-            StepIndex(+1);
-            latchControllerRotation = currentRot;
-            StartCoroutine(StepCooldown());
-        }
-        else if (signedAngle <= -twistStepDegrees)
-        {
-            StepIndex(-1);
-            latchControllerRotation = currentRot;
-            StartCoroutine(StepCooldown());
-        }
+        //new 24/2
+        currentRotation = latchStartRotation + signedAngle;
+        currentRotation = Mathf.Repeat(currentRotation, 360f);
+        cylinder.localRotation = baseRotation * Quaternion.Euler(0f, currentRotation, 0f);
+
     }
 
     //snap with event and should play sound
@@ -127,6 +128,30 @@ public class TicketSelector : MonoBehaviour
         gripReady = true;
         stepOnCooldown = false;
     }
+
+    //new24/2
+    private void SnapToNearestIndex()
+    {
+        int newIndex = Mathf.RoundToInt(currentRotation / rotationPerTicket) % 6;
+        if (newIndex < 0) newIndex += 6;
+
+        if (newIndex == currentIndex)
+        {
+            //still force exact snap to slot
+            currentRotation = currentIndex * rotationPerTicket;
+            cylinder.localRotation = baseRotation * Quaternion.Euler(0f, currentRotation, 0f);
+            return;
+        }
+
+        currentIndex = newIndex;
+        OnTicketChanged?.Invoke(currentIndex);
+
+        currentRotation = currentIndex * rotationPerTicket;
+        cylinder.localRotation = baseRotation * Quaternion.Euler(0f, currentRotation, 0f);
+
+        if (sound != null) sound.Play();
+    }
+
 
     private bool IsControllerNearCylinder()
     {

@@ -20,12 +20,24 @@ public class CriticalOption : MonoBehaviour
 
     private Quaternion baseRotation;
 
-    //new
     [SerializeField] private Renderer[] cubeRenderers;
+
+
+    //new24/02
+    [SerializeField] private Transform buttonTransform;//asign mesh to move
+    [SerializeField] private float pressDepth = 0.015f;//how far it moves
+    [SerializeField] private float pressLerpSpeed = 18f;//snappy feel
+    private Vector3 buttonBaseLocalPos;
 
     private void Start()
     {
         baseRotation = cylinder.localRotation;
+
+        //new24/02
+        if (buttonTransform == null) buttonTransform = cylinder;
+        buttonBaseLocalPos = buttonTransform.localPosition;
+        ApplyButtonPositionImmediate();
+        SetAllCubeColors(isRotated ? Color.red : Color.yellow);
     }
 
     private void Update()
@@ -35,6 +47,9 @@ public class CriticalOption : MonoBehaviour
             Rotating();
             StartCoroutine(GripCooldown());
         }
+
+        //new24/02
+        ApplyButtonPositionSmooth();
     }
 
     private bool IsControllerNearCylinder()
@@ -57,7 +72,7 @@ public class CriticalOption : MonoBehaviour
 
         if (isRotated)
         {
-            cylinder.localRotation = baseRotation * Quaternion.Euler(0f, rotation, 0f);
+            cylinder.localRotation = baseRotation; // * Quaternion.Euler(0f, rotation, 0f);
             SetAllCubeColors(Color.red);
         }
         else
@@ -76,6 +91,23 @@ public class CriticalOption : MonoBehaviour
             if (r != null)
                 r.material.color = color;
         }
+    }
+
+    //new24/02
+    private void ApplyButtonPositionSmooth()
+    {
+        if (buttonTransform == null) return;
+
+        Vector3 target = buttonBaseLocalPos + (isRotated ? Vector3.down * pressDepth : Vector3.zero);
+        buttonTransform.localPosition = Vector3.Lerp(buttonTransform.localPosition, target, Time.deltaTime * pressLerpSpeed);
+    }
+    //new as well
+    private void ApplyButtonPositionImmediate()
+    {
+        if (buttonTransform == null) return;
+
+        Vector3 target = buttonBaseLocalPos + (isRotated ? Vector3.down * pressDepth : Vector3.zero);
+        buttonTransform.localPosition = target;
     }
 
     private IEnumerator GripCooldown()
