@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Inputs.Readers;
 
 public class interactionToolTipScrip : MonoBehaviour
 {
     [SerializeField] Transform canvasTransform;
     [SerializeField] Transform canvasTarget;
+
+    [SerializeField] XRInputValueReader<float> m_RightGripInput = new XRInputValueReader<float>("Grip");
 
     [SerializeField] bool controllerPresent = false;
 
@@ -17,7 +20,7 @@ public class interactionToolTipScrip : MonoBehaviour
     void Update()
     {
 
-      if (controllerPresent)
+      if (controllerPresent && m_RightGripInput.ReadValue() < 0.5f)
       {
           canvasTransform.gameObject.SetActive(true);
       }
