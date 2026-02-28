@@ -8,9 +8,12 @@ public class DynamicSpawningSystems : MonoBehaviour
     public enum Category
     {
         good,
-        bad,
-        meh
+        bad
+        //meh
     }
+
+    [Header("Scenario Parent")]
+    public GameObject _scenarios;
 
     [Header("Spawnpoints")]
     public GameObject locationParent;
@@ -30,7 +33,8 @@ public class DynamicSpawningSystems : MonoBehaviour
     {
         scenarios.Add(Category.good, goodScenarios);
         scenarios.Add(Category.bad, badScenarios);
-        scenarios.Add(Category.meh, mehScenarios);
+        //scenarios.Add(Category.meh, mehScenarios);
+        GenerateScenarios();
     }
 
     public void GenerateScenarios()
@@ -39,18 +43,18 @@ public class DynamicSpawningSystems : MonoBehaviour
 
         foreach (Transform t in locationParent.GetComponentsInChildren<Transform>())
         {
-            if (t == locationParent.transform)
+            if(t == locationParent.transform)
                 continue;
 
             Category thingType = System.Enum.GetValues(typeof(Category))
                 .Cast<Category>()
                 .PickRandom();
-
+            
             GameObject randomScenario = scenarios[thingType].PickRandom();
             if (randomScenario == null)
                 continue;
 
-            GameObject i = Instantiate(randomScenario, t.position, t.rotation, t);
+            GameObject i = Instantiate(randomScenario, t.localPosition, Quaternion.Euler(t.localRotation.x, Random.Range(-720, 721), t.localRotation.z), _scenarios.transform);
 
             ActiveScenarios.Add(i);
         }
