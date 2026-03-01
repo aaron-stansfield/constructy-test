@@ -55,7 +55,11 @@ public class DynamicSpawningSystems : MonoBehaviour
                 continue;
 
             GameObject i = Instantiate(randomScenario, t.localPosition, Quaternion.Euler(t.localRotation.x, Random.Range(-720, 721), t.localRotation.z), _scenarios.transform);
-
+            try
+            {
+                i.transform.GetComponentInChildren<SituationScript>().takeTextSpot();
+            }
+            catch { Debug.LogWarning("noscripattached :("); }
             ActiveScenarios.Add(i);
         }
     }

@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SituationScript : MonoBehaviour
 {
@@ -11,6 +13,10 @@ public class SituationScript : MonoBehaviour
     public bool idCheck;
     public bool fixCheck;
 
+
+
+    private GameObject targetText;
+
     [SerializeField] LayerMask ticketLayer;
     [SerializeField] LayerMask fixLayer;
 
@@ -19,7 +25,7 @@ public class SituationScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -28,27 +34,52 @@ public class SituationScript : MonoBehaviour
 
         foreach (Collider col in Physics.OverlapSphere(this.transform.position, checkRadius, ticketLayer))
         {
-            fixIcons.SetActive(true);
+            try
+            {
+                fixIcons.SetActive(true);
+
+                targetText.transform.GetChild(0).gameObject.SetActive(true);
+                targetText.GetComponentInChildren<Image>().image = fixIcons.GetComponentInChildren<Image>().image;
+            }
+            catch { }
             return;
             
         }
         foreach (Collider col in Physics.OverlapSphere(this.transform.position, checkRadius, fixLayer))
         {
-            //if (!fixIcons.transform.GetChild(0).gameObject.activeInHierarchy)
-            //{
-                fixIcons.SetActive(true);
-                
-            //}
 
-            //else
-            //{
-            //    fixIcons.transform.GetChild(0).gameObject.SetActive(false);
-            //    fixIcons.transform.GetChild(1).gameObject.SetActive(true);
-            //}
+
+            fixIcons.SetActive(true);
+
             return;
         }
+        try
+        {
+            targetText.transform.GetChild(0).gameObject.SetActive(false);
+        }
+        catch { }
         fixIcons.SetActive(false);
-        //fixIcons.transform.GetChild(1).gameObject.SetActive(false);
+    }
+
+
+    public void takeTextSpot()
+    {
+        Transform updateText = GameObject.Find("update text array").transform;
+        // this is to add ownership of one of the 8 report things in the shed to this specific object
+        // then sets its tag so other scenarios know its taken
+        int count = 0;
+        for (int i = 0; i < updateText.childCount + 1; i++)
+        {
+            count++;
+            if (!updateText.GetChild(i).CompareTag("textTaken"))
+            {
+                updateText.GetChild(i).tag = "textTaken";
+                targetText = updateText.GetChild(i).gameObject;
+                break;
+            }
+            Debug.Log("goobed as fuck, there aint enough text fields for this many scenarios");
+        }
+        targetText.GetComponent<TMP_Text>().text = count.ToString();
     }
 
 

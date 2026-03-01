@@ -17,6 +17,8 @@ TagManager:
   - trippingHazard
   - Occluder Static
   - Occludee Static
+  - Lifting
+  - textTaken
   layers:
   - Default
   - TransparentFX
