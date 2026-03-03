@@ -27,7 +27,7 @@ public class GunToggleScript : MonoBehaviour
             canToggleGun = false;
             if (controller.gameObject.activeInHierarchy) controller.GetComponent<ControllerScript>().drop();
 
-            if (gun.gameObject.activeInHierarchy) gun.GetComponent<GunScript>().stopTicketing();
+            if (gun.gameObject.activeInHierarchy) gun.GetComponent<GunScrip>().stopTicketing();
             
             controller.gameObject.SetActive(!controller.gameObject.activeSelf);
             gun.gameObject.SetActive(!gun.gameObject.activeSelf);

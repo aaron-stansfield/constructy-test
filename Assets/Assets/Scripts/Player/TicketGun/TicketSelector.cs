@@ -87,18 +87,20 @@ public class TicketSelector : MonoBehaviour
         //if (stepOnCooldown) return;
 
         Quaternion currentRot = leftController.transform.rotation;
-        Quaternion delta = Quaternion.Inverse(latchControllerRotation) * currentRot;
+        //Quaternion delta = Quaternion.Inverse(latchControllerRotation) * currentRot;
 
-        delta.ToAngleAxis(out float angle, out Vector3 axis);
-        if (angle > 180f) angle -= 360f;
+        //delta.ToAngleAxis(out float angle, out Vector3 axis);
+        //if (angle > 180f) angle -= 360f;
 
-        float sign = Mathf.Sign(Vector3.Dot(axis, cylinder.up));
-        float signedAngle = angle * sign;
+        //float sign = Mathf.Sign(Vector3.Dot(axis, cylinder.up));
+        //float signedAngle = angle * sign;
 
         //new 24/2
-        currentRotation = latchStartRotation + signedAngle;
+        currentRotation = latchStartRotation + currentRot.eulerAngles.z;
         currentRotation = Mathf.Repeat(currentRotation, 360f);
-        cylinder.localRotation = baseRotation * Quaternion.Euler(0f, currentRotation, 0f);
+        cylinder.localRotation =/* baseRotation * */Quaternion.Euler(currentRot.eulerAngles.z, -90.0f, 90.0f);
+
+
 
     }
 
@@ -147,7 +149,7 @@ public class TicketSelector : MonoBehaviour
         OnTicketChanged?.Invoke(currentIndex);
 
         currentRotation = currentIndex * rotationPerTicket;
-        cylinder.localRotation = baseRotation * Quaternion.Euler(0f, currentRotation, 0f);
+        cylinder.localRotation = /*baseRotation **/ Quaternion.Euler(0f, currentRotation, 0f);
 
         if (sound != null) sound.Play();
     }
