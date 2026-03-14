@@ -12561,7 +12561,7 @@ MonoBehaviour:
   - {fileID: 6674955112460997550, guid: a030778060b207348915413f5d374e6d, type: 3}
   - {fileID: 2067705586134257997, guid: 419e9e8c4756e4e4b8343697ffb6526e, type: 3}
   - {fileID: 8639238390134616940, guid: 95c41feef4b6ace4480be92a5854c6bc, type: 3}
-  mehScenarios: []
+  safetyScenarios: []
   ActiveScenarios: []
 --- !u!1 &183469269
 GameObject:
@@ -26321,6 +26321,7 @@ MonoBehaviour:
   hasPivot: 0
   pivotDifference: 0
   interactScript: {fileID: 0}
+  acceptPoint: 0
 --- !u!65 &563289926
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -95483,6 +95484,7 @@ MonoBehaviour:
   hasPivot: 0
   pivotDifference: 0
   interactScript: {fileID: 0}
+  acceptPoint: 0
 --- !u!114 &3469287838654772302
 MonoBehaviour:
   m_ObjectHideFlags: 0

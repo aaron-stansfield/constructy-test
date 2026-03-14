@@ -1,5 +1,17 @@
 using UnityEngine;
 using System.Collections;
+using System.Data;
+using Assets.Assets.Scripts.Environment.Objects;
+
+
+public enum AttachPointType
+{
+    Head,
+    Hands,
+    Torso,
+    Legs,
+    Feet
+}
 
 public class AttachObject : MonoBehaviour
 {
@@ -10,7 +22,7 @@ public class AttachObject : MonoBehaviour
     public float pivotDifference;
 
     public ObjectInteraction interactScript;
-
+    public AttachPointType acceptPoint;
 
     private bool isLerping = false;
 
@@ -20,17 +32,19 @@ public class AttachObject : MonoBehaviour
         if (targetTransform != null && !isLerping)
         {
             StartCoroutine(LerpToPositionAndRotation(targetTransform.position, targetTransform.rotation, lerpDuration));
-
-
         }
     }
 
-
-    private void Update()
+    private void OnTriggerEnter(Collider other)
     {
-
+        if(other.CompareTag("AttatchArea") && !isLerping)
+        {
+            if(other.GetComponent<AttachPoint>() is AttachPoint attachPoint && attachPoint.attachPointType != acceptPoint)
+                return;
+            targetTransform = other.transform;
+            StartLerp();
+        }
     }
-
 
     private IEnumerator LerpToPositionAndRotation(Vector3 targetPos, Quaternion targetRot, float duration)
     {

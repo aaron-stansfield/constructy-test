@@ -8,8 +8,8 @@ public class DynamicSpawningSystems : MonoBehaviour
     public enum Category
     {
         good,
-        bad
-        //meh
+        bad,
+        //safety
     }
 
     [Header("Scenario Parent")]
@@ -21,10 +21,9 @@ public class DynamicSpawningSystems : MonoBehaviour
     [Header("prefabs by category")]
     public List<GameObject> goodScenarios = new List<GameObject>();
     public List<GameObject> badScenarios = new List<GameObject>();
-    public List<GameObject> mehScenarios = new List<GameObject>();
+    public List<GameObject> safetyScenarios = new List<GameObject>();
 
-    private Dictionary<Category, List<GameObject>> scenarios =
-        new Dictionary<Category, List<GameObject>>();
+    private Dictionary<Category, List<GameObject>> scenarios = new Dictionary<Category, List<GameObject>>();
 
     [Header("spawned ones")]
     public List<GameObject> ActiveScenarios = new List<GameObject>();
@@ -33,7 +32,7 @@ public class DynamicSpawningSystems : MonoBehaviour
     {
         scenarios.Add(Category.good, goodScenarios);
         scenarios.Add(Category.bad, badScenarios);
-        //scenarios.Add(Category.meh, mehScenarios);
+        //scenarios.Add(Category.safety, safetyScenarios);
         GenerateScenarios();
     }
 

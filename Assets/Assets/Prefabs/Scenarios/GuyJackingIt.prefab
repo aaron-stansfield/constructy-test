@@ -1082,7 +1082,7 @@ Transform:
   m_GameObject: {fileID: 6116852715729006921}
   serializedVersion: 2
   m_LocalRotation: {x: -0.17680798, y: -0.40346402, z: -0.10076675, w: 0.8920772}
-  m_LocalPosition: {x: -0.537, y: -0.02, z: -0.065}
+  m_LocalPosition: {x: 0.415, y: -0.02, z: 0.507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6015,8 +6015,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6439672667414320549}
   - component: {fileID: 3536136651530816748}
+  - component: {fileID: 2122184886356591155}
   m_Layer: 0
-  m_Name: AttachArea (3)
+  m_Name: glovesAttach
   m_TagString: AttatchArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6030,13 +6031,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6390417975918484590}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0047893417, y: -0.36512664, z: -0.0122100925, w: -0.9308654}
-  m_LocalPosition: {x: -0.023, y: 1.787, z: 0.025}
+  m_LocalRotation: {x: -0.005923405, y: -0.275391, z: -0.011702028, w: -0.96124285}
+  m_LocalPosition: {x: 0.405, y: 1.013, z: 0.427}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 886702314587167358}
-  m_LocalEulerAnglesHint: {x: 0, y: 42.835, z: 1.503}
+  m_LocalEulerAnglesHint: {x: 0.283, y: 31.977, z: 1.476}
 --- !u!65 &3536136651530816748
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6056,8 +6057,21 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.25, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.69979346, y: 0.7102116, z: 0.5833574}
+  m_Center: {x: -0.05303376, y: 0.067959815, z: 0.05529934}
+--- !u!114 &2122184886356591155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6390417975918484590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9567548114b9c41938deb8edddb391, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachPointType: 1
 --- !u!1 &6472057973141590255
 GameObject:
   m_ObjectHideFlags: 0

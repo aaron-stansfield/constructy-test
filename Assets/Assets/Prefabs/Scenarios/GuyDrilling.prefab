@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6794128439418550300}
   - component: {fileID: 5782613743000250870}
+  - component: {fileID: 5572379453662532846}
   m_Layer: 0
   m_Name: AttachArea
   m_TagString: AttatchArea
@@ -53,6 +54,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.25, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5572379453662532846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885003663351836304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9567548114b9c41938deb8edddb391, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachPointType: 0
 --- !u!1 &3564301448994177382
 GameObject:
   m_ObjectHideFlags: 0
