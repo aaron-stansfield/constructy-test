@@ -12559,6 +12559,7 @@ MonoBehaviour:
   badScenarios:
   - {fileID: 3564301448994177382, guid: 8f1ea27a184a25045b3cd6ec7c9479be, type: 3}
   - {fileID: 6674955112460997550, guid: a030778060b207348915413f5d374e6d, type: 3}
+  - {fileID: 6674955112460997550, guid: 29beda80dfe234d4fa8a3ff20b391aca, type: 3}
   - {fileID: 2067705586134257997, guid: 419e9e8c4756e4e4b8343697ffb6526e, type: 3}
   - {fileID: 8639238390134616940, guid: 95c41feef4b6ace4480be92a5854c6bc, type: 3}
   safetyScenarios: []
@@ -25515,6 +25516,63 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &536654060
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 692475170007685969, guid: e4ce8b87bfcc2cf41ab739f0f6474ced, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 22.421581
+      objectReference: {fileID: 0}
+    - target: {fileID: 692475170007685969, guid: e4ce8b87bfcc2cf41ab739f0f6474ced, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.436
+      objectReference: {fileID: 0}
+    - target: {fileID: 692475170007685969, guid: e4ce8b87bfcc2cf41ab739f0f6474ced, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.028648
+      objectReference: {fileID: 0}
+    - target: {fileID: 692475170007685969, guid: e4ce8b87bfcc2cf41ab739f0f6474ced, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9073697
+      objectReference: {fileID: 0}
+    - target: {fileID: 692475170007685969, guid: e4ce8b87bfcc2cf41ab739f0f6474ced, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 692475170007685969, guid: e4ce8b87bfcc2cf41ab739f0f6474ced, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.42033362
+      objectReference: {fileID: 0}
+    - target: {fileID: 692475170007685969, guid: e4ce8b87bfcc2cf41ab739f0f6474ced, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 692475170007685969, guid: e4ce8b87bfcc2cf41ab739f0f6474ced, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 692475170007685969, guid: e4ce8b87bfcc2cf41ab739f0f6474ced, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -49.711
+      objectReference: {fileID: 0}
+    - target: {fileID: 692475170007685969, guid: e4ce8b87bfcc2cf41ab739f0f6474ced, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4044744772769710293, guid: e4ce8b87bfcc2cf41ab739f0f6474ced, type: 3}
+      propertyPath: m_Name
+      value: AudioDamageIndicator
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e4ce8b87bfcc2cf41ab739f0f6474ced, type: 3}
 --- !u!1 &539151519
 GameObject:
   m_ObjectHideFlags: 0
@@ -35904,6 +35962,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7917674758326848202, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
   m_PrefabInstance: {fileID: 1373153106}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &886291787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886291775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153fb85ad1a552e4f8729e3b24869414, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &891533167
 GameObject:
   m_ObjectHideFlags: 0
@@ -51757,6 +51827,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7917674758326848201, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       insertIndex: -1
       addedObject: {fileID: 886291781}
+    - targetCorrespondingSourceObject: {fileID: 7917674758326848201, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 886291787}
     - targetCorrespondingSourceObject: {fileID: 7917674758240283208, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       insertIndex: 1
       addedObject: {fileID: 7917674759014681888}
@@ -100524,3 +100597,4 @@ SceneRoots:
   - {fileID: 1792903026}
   - {fileID: 39131735}
   - {fileID: 928780018}
+  - {fileID: 536654060}

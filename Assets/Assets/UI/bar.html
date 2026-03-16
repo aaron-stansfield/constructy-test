@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent; /* solid background so text is always visible */
+    }
+  </style>
+</head>
+
+<body class="text-white font-sans">
+  <div id="overlay" class="p-6">
+  </div>
+
+  <script>
+    async function fetchOverlayData() {
+      const overlay = document.getElementById("overlay");
+
+      try {
+        const res = await fetch("https://localhost:7222/common/PopupOverlay", {
+          method: "GET",
+          headers: { "Accept": "application/json" }
+        });
+
+        if (!res.ok) {
+          overlay.innerHTML = `<p class="text-red-500 text-xl">API returned ${res.status}</p>`;
+          return;
+        }
+
+        let data = await res.json();
+
+        // If the API returned a JSON string, parse it
+        if (typeof data === "string") {
+            data = JSON.parse(data);
+        }
+
+        overlay.innerHTML = `
+          <div class="flex flex-col items-center p-4 bg-gray-800 shadow-xl shadow-violet-700/50 rounded-lg">
+            <div class="flex w-full items-center justify-between">
+                <img class="rounded-md size-24 ml-5" src="bfg26.png"/>
+
+                <div class="flex flex-col items-center flex-1 bg-gray-700 ml-10 mr-10 rounded-md">
+                    <h1 class="text-5xl font-bold">${data.header ?? "No title"}</h1>
+                    <p class="text-2xl mt-2">${data.content ?? ""}</p>
+                </div>
+
+                <img class="rounded-md size-24 mr-5" src="bfg26.png"/>
+            </div>
+          </div>
+        `;
+      } catch (err) {
+        overlay.innerHTML = `
+          <p class="text-red-500 text-xl">Error: ${err.message}</p>
+        `;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      fetchOverlayData();
+      setInterval(fetchOverlayData, 5000);
+    });
+  </script>
+</body>
+</html>
