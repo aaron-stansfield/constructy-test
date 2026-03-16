@@ -29,13 +29,13 @@ public class AudioDamageIndicatorScript : MonoBehaviour
 
     private IEnumerator<float> damageCoroutine()
     {
-        while (damageDone < 100)
+        while (damageDone < 101)
         {
             if (Vector3.Distance(transform.position, Player.instance.transform.position) < 2f)
             {
                 damageDone += 1;
             }
-            bar.fillAmount = damageDone/100;
+            bar.fillAmount = damageDone / 100;
             yield return Timing.WaitForSeconds(0.5f);
         }
     }
