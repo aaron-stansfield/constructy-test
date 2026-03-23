@@ -59,16 +59,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59b6606ef2548734bb6d11b9d160bc7e, type: 3}
   m_Name: HDRISky
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   rotation:
     m_OverrideState: 1
     m_Value: 242
   skyIntensityMode:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   exposure:
     m_OverrideState: 1
-    m_Value: 14
+    m_Value: 13.26
   multiplier:
     m_OverrideState: 0
     m_Value: 1
@@ -79,8 +79,8 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: {x: 0.5, y: 0.4472608, z: 0.31442374}
   desiredLuxValue:
-    m_OverrideState: 0
-    m_Value: 20000
+    m_OverrideState: 1
+    m_Value: 50000
   updateMode:
     m_OverrideState: 0
     m_Value: 0
