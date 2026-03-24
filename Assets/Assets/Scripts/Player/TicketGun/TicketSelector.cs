@@ -98,7 +98,7 @@ public class TicketSelector : MonoBehaviour
         //new 24/2
         currentRotation = latchStartRotation + currentRot.eulerAngles.z;
         currentRotation = Mathf.Repeat(currentRotation, 360f);
-        cylinder.localRotation =/* baseRotation * */Quaternion.Euler(currentRot.eulerAngles.z, -90.0f, 90.0f);
+        cylinder.localRotation =/* baseRotation * */Quaternion.Euler(0.0f, -180.0f, -currentRot.eulerAngles.z);
 
 
 
@@ -149,7 +149,7 @@ public class TicketSelector : MonoBehaviour
         OnTicketChanged?.Invoke(currentIndex);
 
         currentRotation = currentIndex * rotationPerTicket;
-        cylinder.localRotation = /*baseRotation **/ Quaternion.Euler(0f, currentRotation, 0f);
+        cylinder.localRotation = /*baseRotation **/ Quaternion.Euler(0f, -currentRotation, 0f);
 
         if (sound != null) sound.Play();
     }
