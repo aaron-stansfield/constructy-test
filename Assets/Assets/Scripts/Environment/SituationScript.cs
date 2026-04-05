@@ -20,6 +20,8 @@ public class SituationScript : MonoBehaviour
     [SerializeField] LayerMask ticketLayer;
     [SerializeField] LayerMask fixLayer;
 
+    [SerializeField] string boardText;
+
     [SerializeField] GameObject fixIcons;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,7 +41,10 @@ public class SituationScript : MonoBehaviour
                 fixIcons.SetActive(true);
 
                 targetText.transform.GetChild(0).gameObject.SetActive(true);
-                targetText.GetComponentInChildren<Image>().image = fixIcons.GetComponentInChildren<Image>().image;
+                targetText.GetComponent<TMP_Text>().text = boardText;
+                
+                //obselete i think
+                //targetText.GetComponentInChildren<Image>().image = fixIcons.GetComponentInChildren<Image>().image;
             }
             catch { }
             return;
@@ -50,14 +55,17 @@ public class SituationScript : MonoBehaviour
 
 
             fixIcons.SetActive(true);
-
+            targetText.GetComponent<TMP_Text>().text = boardText;
+            try
+            {
+                targetText.transform.GetChild(1).gameObject.SetActive(true);
+            }
+            catch { }
             return;
         }
-        try
-        {
-            targetText.transform.GetChild(0).gameObject.SetActive(false);
-        }
-        catch { }
+
+        targetText.transform.GetChild(0).gameObject.SetActive(false);
+        targetText.transform.GetChild(1).gameObject.SetActive(false);
         fixIcons.SetActive(false);
     }
 

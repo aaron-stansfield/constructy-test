@@ -5160,6 +5160,7 @@ MonoBehaviour:
   fixLayer:
     serializedVersion: 2
     m_Bits: 128
+  boardText: guy drillin
   fixIcons: {fileID: 6970109800111380305}
 --- !u!1 &6970109800111380305
 GameObject:

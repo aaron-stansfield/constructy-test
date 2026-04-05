@@ -29,7 +29,7 @@ public class AudioDamageIndicatorScript : MonoBehaviour
 
     private IEnumerator<float> damageCoroutine()
     {
-        while (damageDone < 101)
+        while (damageDone <= 100)
         {
             if (Vector3.Distance(transform.position, Player.instance.transform.position) < 2f)
             {

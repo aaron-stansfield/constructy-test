@@ -3567,6 +3567,7 @@ MonoBehaviour:
   fixLayer:
     serializedVersion: 2
     m_Bits: 0
+  boardText: guy liftin
   fixIcons: {fileID: 8084528342866135679}
 --- !u!82 &2583413742006228858
 AudioSource:

@@ -602,6 +602,7 @@ MonoBehaviour:
   fixLayer:
     serializedVersion: 2
     m_Bits: 128
+  boardText: guy jackin
   fixIcons: {fileID: 843831915214069208}
 --- !u!1 &4577708579423201387
 GameObject:

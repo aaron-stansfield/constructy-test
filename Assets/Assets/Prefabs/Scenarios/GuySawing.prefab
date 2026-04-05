@@ -6283,6 +6283,7 @@ MonoBehaviour:
   fixLayer:
     serializedVersion: 2
     m_Bits: 128
+  boardText: guy sawin
   fixIcons: {fileID: 7579239308944474079}
 --- !u!1 &2595021933176266265
 GameObject:
@@ -7193,6 +7194,7 @@ MonoBehaviour:
   fixLayer:
     serializedVersion: 2
     m_Bits: 128
+  boardText: 
   fixIcons: {fileID: 7579239308944474079}
 --- !u!1 &4464175886188431056
 GameObject:
