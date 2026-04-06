@@ -14,7 +14,7 @@ public class TicketSelector : MonoBehaviour
 
     [SerializeField] CriticalOption dialScip;
 
-    [SerializeField] private float rotationPerTicket = 60f;
+    [SerializeField] private float rotationPerTicket = 72f;
     [SerializeField] private float scrollSensitivity = 5f;
     [SerializeField] private float snapSpeed = 10f;
 
@@ -107,7 +107,7 @@ public class TicketSelector : MonoBehaviour
     //snap with event and should play sound
     private void StepIndex(int delta)
     {
-        int newIndex = (currentIndex + delta) % 6;
+        int newIndex = (currentIndex + delta) % 5;
         if (newIndex < 0) newIndex += 6;
 
         if (newIndex == currentIndex) return;
@@ -134,22 +134,22 @@ public class TicketSelector : MonoBehaviour
     //new24/2
     private void SnapToNearestIndex()
     {
-        int newIndex = Mathf.RoundToInt(currentRotation / rotationPerTicket) % 6;
-        if (newIndex < 0) newIndex += 6;
+        int newIndex = Mathf.RoundToInt(currentRotation / rotationPerTicket) % 5;
+        if (newIndex < 0) newIndex += 5;
 
-        if (newIndex == currentIndex)
-        {
-            //still force exact snap to slot
-            currentRotation = currentIndex * rotationPerTicket;
-            cylinder.localRotation = baseRotation * Quaternion.Euler(0f, currentRotation, 0f);
-            return;
-        }
+        //if (newIndex == currentIndex)
+        //{
+        //    //still force exact snap to slot
+        //    currentRotation = currentIndex * rotationPerTicket;
+        //    cylinder.localRotation = baseRotation * Quaternion.Euler(0f, currentRotation, 0f);
+        //    return;
+        //}
 
         currentIndex = newIndex;
         OnTicketChanged?.Invoke(currentIndex);
 
         currentRotation = currentIndex * rotationPerTicket;
-        cylinder.localRotation = /*baseRotation **/ Quaternion.Euler(0f, -currentRotation, 0f);
+        cylinder.localRotation = /*baseRotation **/ Quaternion.Euler(0f, -180, currentIndex);
 
         if (sound != null) sound.Play();
     }

@@ -40,6 +40,7 @@ public class DynamicSpawningSystems : MonoBehaviour
     {
         ActiveScenarios.Clear();
 
+        int goodCount = 0;
         foreach (Transform t in locationParent.GetComponentsInChildren<Transform>())
         {
             if(t == locationParent.transform)
@@ -50,6 +51,21 @@ public class DynamicSpawningSystems : MonoBehaviour
                 .PickRandom();
             
             GameObject randomScenario = scenarios[thingType].PickRandom();
+            
+            if (randomScenario.name == "GuysStanding") { goodCount++; }
+            
+            if (goodCount > 2)
+            {
+                while (randomScenario.name == "GuysStanding")
+                {
+                    thingType = System.Enum.GetValues(typeof(Category))
+                    .Cast<Category>()
+                            .PickRandom();
+
+                    randomScenario = scenarios[thingType].PickRandom();
+                }
+            }
+
             if (randomScenario == null)
                 continue;
 

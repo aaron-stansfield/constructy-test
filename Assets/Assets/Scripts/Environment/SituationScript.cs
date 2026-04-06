@@ -85,9 +85,10 @@ public class SituationScript : MonoBehaviour
                 targetText = updateText.GetChild(i).gameObject;
                 break;
             }
+
             Debug.Log("goobed as fuck, there aint enough text fields for this many scenarios");
         }
-        targetText.GetComponent<TMP_Text>().text = count.ToString();
+        targetText.GetComponent<TMP_Text>().text = ("situation "+count.ToString());
     }
 
 

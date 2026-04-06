@@ -14,7 +14,7 @@ public class AudioDamageIndicatorScript : MonoBehaviour
         damageDone = 0;
         Timing.RunCoroutine(damageCoroutine());
     }
-
+    
     private void Update()
     {
         if(Vector3.Distance(transform.position, Player.instance.transform.position) < 2f)
@@ -25,6 +25,7 @@ public class AudioDamageIndicatorScript : MonoBehaviour
         {
             canvas.enabled = false;
         }
+        
     }
 
     private IEnumerator<float> damageCoroutine()
