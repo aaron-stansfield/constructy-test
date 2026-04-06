@@ -78,8 +78,8 @@ public class AttachObject : MonoBehaviour
         }
 
         // Snap to final position/rotation
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
+        //transform.localPosition = Vector3.zero;
+        //transform.localRotation = Quaternion.identity;
         
 
         isLerping = false;
