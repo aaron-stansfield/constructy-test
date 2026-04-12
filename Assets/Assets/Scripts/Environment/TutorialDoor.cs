@@ -5,7 +5,8 @@ using UnityEngine;
 public class TutorialDoor : MonoBehaviour
 {
     public static TutorialDoor instance = null;
-    public GameObject lDoor, rDoor;
+    public GameObject lDoor;
+    //public GameObject rDoor;
     public bool open = false;
     private float timeElapsed = 0f;
     public bool hatOn, slidesWatched = false;
@@ -31,8 +32,8 @@ public class TutorialDoor : MonoBehaviour
     {
         while (timeElapsed < 1.5f)
         {
-            lDoor.transform.localRotation = Quaternion.Euler(new(0, Mathf.Lerp(0f, 150f, timeElapsed), 0));
-            rDoor.transform.localRotation = Quaternion.Euler(new(0, Mathf.Lerp(0f, -150f, timeElapsed), 0));
+            lDoor.transform.localRotation = Quaternion.Euler(new(0, Mathf.Lerp(0f, 110f, timeElapsed), 0));
+            //rDoor.transform.localRotation = Quaternion.Euler(new(0, Mathf.Lerp(0f, -150f, timeElapsed), 0));
 
             timeElapsed += Time.deltaTime;
             yield return Timing.WaitForOneFrame;
