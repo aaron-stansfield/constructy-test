@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Assets.Scripts;
@@ -40,7 +41,10 @@ public class DynamicSpawningSystems : MonoBehaviour
     {
         ActiveScenarios.Clear();
 
+
+        int badcount = 0;
         int goodCount = 0;
+
         foreach (Transform t in locationParent.GetComponentsInChildren<Transform>())
         {
             if(t == locationParent.transform)
@@ -49,27 +53,35 @@ public class DynamicSpawningSystems : MonoBehaviour
             Category thingType = System.Enum.GetValues(typeof(Category))
                 .Cast<Category>()
                 .PickRandom();
-            
-            GameObject randomScenario = scenarios[thingType].PickRandom();
-            
-            if (randomScenario.name == "GuysStanding") { goodCount++; }
-            
-            if (goodCount > 2)
-            {
-                while (randomScenario.name == "GuysStanding")
-                {
-                    thingType = System.Enum.GetValues(typeof(Category))
-                    .Cast<Category>()
-                            .PickRandom();
 
+            GameObject randomScenario = null;
+
+            if (thingType == Category.bad || goodCount >= 2)
+            {
+                thingType = Category.bad;
+                if (badcount < scenarios[thingType].Capacity)
+                {
+                    randomScenario = scenarios[thingType][badcount];
+                }
+                else
+                {
                     randomScenario = scenarios[thingType].PickRandom();
                 }
+                badcount++;
+            }
+            else
+            {
+                thingType = Category.good;
+                randomScenario = scenarios[thingType].PickRandom();
+                goodCount++;
             }
 
             if (randomScenario == null)
                 continue;
 
-            GameObject i = Instantiate(randomScenario, t.localPosition, Quaternion.Euler(t.localRotation.x, Random.Range(-720, 721), t.localRotation.z), _scenarios.transform);
+
+
+            GameObject i = Instantiate(randomScenario, t.localPosition, Quaternion.Euler(t.localRotation.x, UnityEngine.Random.Range(-720, 721), t.localRotation.z), _scenarios.transform);
             try
             {
                 i.transform.GetComponentInChildren<SituationScript>().takeTextSpot();
