@@ -36,7 +36,7 @@ public class AudioDamageIndicatorScript : MonoBehaviour
             {
                 damageDone += 1;
             }
-            bar.fillAmount = damageDone / 100;
+            bar.fillAmount = damageDone/100f;
             yield return Timing.WaitForSeconds(0.5f);
         }
     }

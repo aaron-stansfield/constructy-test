@@ -19,6 +19,7 @@ TagManager:
   - Occludee Static
   - Lifting
   - textTaken
+  - ear defenders
   layers:
   - Default
   - TransparentFX
