@@ -34,9 +34,10 @@ public class AudioDamageIndicatorScript : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, Player.instance.transform.position) < 2f)
             {
+                print("fucking some ears");
                 damageDone += 1;
             }
-            bar.fillAmount = damageDone / 100;
+            bar.fillAmount = damageDone/100f;
             yield return Timing.WaitForSeconds(0.5f);
         }
     }

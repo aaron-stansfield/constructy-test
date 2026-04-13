@@ -593,7 +593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkRadius: 1.23
   expectedTicket: other
-  expectedFix: floor sign
+  expectedFix: ear defenders
   idCheck: 0
   fixCheck: 0
   ticketLayer:
