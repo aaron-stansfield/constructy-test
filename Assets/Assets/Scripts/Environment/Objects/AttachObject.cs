@@ -5,12 +5,13 @@ using Assets.Assets.Scripts.Environment.Objects;
 
 
 public enum AttachPointType
-{
+{ 
     Head,
     Hands,
     Torso,
     Legs,
-    Feet
+    Feet,
+    EarDefenders
 }
 
 public class AttachObject : MonoBehaviour
