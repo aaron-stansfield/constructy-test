@@ -13,7 +13,7 @@ public class SituationScript : MonoBehaviour
     public bool idCheck;
     public bool fixCheck;
 
-
+    [SerializeField] AudioDamageIndicatorScript audioDamage;
 
     private GameObject targetText;
 
@@ -59,7 +59,16 @@ public class SituationScript : MonoBehaviour
             try
             {
                 targetText.transform.GetChild(1).gameObject.SetActive(true);
+                if (col.transform.CompareTag(expectedFix) && expectedFix == "ear defenders")
+                {
+                    audioDamage.hasPPE = true;
+                }
+                else
+                {
+                    audioDamage.hasPPE = false;
+                }
             }
+            
             catch { }
             return;
         }
