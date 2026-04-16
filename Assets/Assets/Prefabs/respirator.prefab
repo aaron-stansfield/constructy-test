@@ -601,6 +601,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: respie
       objectReference: {fileID: 0}
+    - target: {fileID: 5714715787499242825, guid: d3172da9376320a4abc6dd21812aba3b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7d53d6b7996332748803f82e8841028b, type: 2}
     - target: {fileID: 6674503185748097819, guid: d3172da9376320a4abc6dd21812aba3b, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.37539
@@ -653,6 +657,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7255463253853420186, guid: d3172da9376320a4abc6dd21812aba3b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7d53d6b7996332748803f82e8841028b, type: 2}
+    - target: {fileID: 7257484582292963837, guid: d3172da9376320a4abc6dd21812aba3b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d1b8152cd24112e4cba3e6e7798cc89a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
