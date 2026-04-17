@@ -3188,12 +3188,14 @@ MonoBehaviour:
   expectedFix: verbal abuse
   idCheck: 0
   fixCheck: 0
+  audioDamage: {fileID: 0}
   ticketLayer:
     serializedVersion: 2
     m_Bits: 64
   fixLayer:
     serializedVersion: 2
     m_Bits: 0
+  boardText: 
   fixIcons: {fileID: 8084528342866135679}
 --- !u!82 &2583413742006228858
 AudioSource:
@@ -3515,7 +3517,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: b56ab4a0464409445bb1746ec0065763, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 91ff3830fc4055a4fb0d0d2be32101a7, type: 2}
+      objectReference: {fileID: 2100000, guid: 3182a554d35f3bf409e364f95de55a76, type: 2}
     - target: {fileID: 919132149155446097, guid: b56ab4a0464409445bb1746ec0065763, type: 3}
       propertyPath: m_Name
       value: pudl
